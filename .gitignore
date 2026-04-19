@@ -18,3 +18,7 @@ bitbybit-static/
 bitbybit-dynamic/
 bitbybit-serverless/
 dashboard/
+.terraform/
+*.tfstate
+*.tfstate.backup
+terraform.tfvars
