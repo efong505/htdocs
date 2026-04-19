@@ -1,0 +1,55 @@
+/* WP License Platform — Public */
+.wplp-checkout, .wplp-portal, .wplp-thank-you, .wplp-pricing-table { max-width: 800px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+.wplp-checkout-tiers { display: flex; gap: 12px; margin: 20px 0; flex-wrap: wrap; }
+.wplp-tier-option { display: flex; flex-direction: column; align-items: center; padding: 20px; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; min-width: 160px; flex: 1; text-align: center; transition: border-color 0.2s; }
+.wplp-tier-option:hover, .wplp-tier-option:has(input:checked) { border-color: #2271b1; }
+.wplp-tier-featured { border-color: #764ba2; }
+.wplp-tier-option input { margin-bottom: 8px; }
+.wplp-tier-name { font-weight: 700; font-size: 16px; }
+.wplp-tier-price { font-size: 24px; font-weight: 700; margin: 4px 0; }
+.wplp-tier-price small { font-size: 14px; font-weight: 400; color: #666; }
+.wplp-tier-sites { font-size: 13px; color: #666; }
+.wplp-checkout-billing { margin: 20px 0; }
+.wplp-checkout-billing label { display: block; font-weight: 600; margin-bottom: 4px; }
+.wplp-checkout-billing select, .wplp-checkout-billing input { width: 100%; padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+.wplp-checkout-summary { background: #f9f9f9; border: 1px solid #eee; border-radius: 8px; padding: 16px 20px; margin: 20px 0; }
+.wplp-summary-line { display: flex; justify-content: space-between; padding: 4px 0; font-size: 15px; }
+.wplp-summary-total { font-weight: 700; font-size: 18px; border-top: 1px solid #ddd; padding-top: 8px; margin-top: 4px; }
+.wplp-reverse-charge { font-size: 13px; color: #996800; margin-top: 8px; }
+.wplp-checkout-disclosure { font-size: 12px; color: #999; margin-top: 20px; }
+/* Portal */
+.wplp-portal-grid { display: flex; gap: 20px; margin: 20px 0; }
+.wplp-portal-card { background: #f9f9f9; border: 1px solid #eee; border-radius: 8px; padding: 20px; text-align: center; min-width: 140px; }
+.wplp-portal-count { display: block; font-size: 36px; font-weight: 700; color: #2271b1; }
+.wplp-portal-label { font-size: 13px; color: #666; }
+.wplp-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+.wplp-table th, .wplp-table td { padding: 10px 12px; border-bottom: 1px solid #eee; text-align: left; }
+.wplp-table th { font-weight: 600; background: #f9f9f9; }
+.wplp-license-card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin: 16px 0; }
+.wplp-license-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.wplp-license-key { background: #f5f5f5; padding: 10px 16px; border-radius: 4px; margin: 8px 0; }
+.wplp-license-key code { font-size: 16px; letter-spacing: 1px; }
+.wplp-license-meta { display: flex; gap: 20px; font-size: 13px; color: #666; }
+.wplp-activations { margin-top: 12px; }
+.wplp-activations ul { margin: 8px 0; padding: 0; list-style: none; }
+.wplp-activations li { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #f0f0f0; }
+.wplp-btn-small { background: none; border: 1px solid #d63638; color: #d63638; padding: 2px 10px; border-radius: 3px; cursor: pointer; font-size: 12px; }
+.wplp-status { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.wplp-status-active { background: #edfaef; color: #00a32a; }
+.wplp-status-expired { background: #f0f0f5; color: #787c82; }
+.wplp-status-revoked { background: #fcf0f1; color: #d63638; }
+/* Pricing table */
+.wplp-pricing-table { text-align: center; }
+.wplp-pricing-table .wplp-pricing-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.wplp-pricing-table .wplp-pricing-card { background: #fff; border: 2px solid #ddd; border-radius: 8px; padding: 30px 24px; width: 220px; position: relative; }
+.wplp-pricing-table .wplp-pricing-featured { border-color: #764ba2; }
+.wplp-pricing-table .wplp-pricing-popular { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; padding: 2px 16px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+.wplp-pricing-table .wplp-pricing-amount { font-size: 42px; font-weight: 700; }
+.wplp-pricing-table .wplp-pricing-period { font-size: 14px; color: #787c82; }
+.wplp-pricing-btn { display: inline-block; margin-top: 16px; padding: 10px 24px; background: #2271b1; color: #fff; text-decoration: none; border-radius: 6px; font-weight: 600; }
+.wplp-pricing-btn:hover { background: #135e96; color: #fff; }
+.wplp-login-prompt { text-align: center; padding: 40px; }
+/* Thank you */
+.wplp-thank-you h2 { margin-bottom: 20px; }
+.wplp-order-summary { background: #f9f9f9; border: 1px solid #eee; border-radius: 8px; padding: 20px; margin: 20px 0; }
+.wplp-order-summary code { font-size: 16px; background: #e8f5e9; padding: 4px 8px; border-radius: 4px; }

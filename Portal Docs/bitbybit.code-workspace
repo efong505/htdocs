@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../bitbybit"
+		},
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../phpMyAdmin"
+		}
+	],
+	"settings": {}
+}

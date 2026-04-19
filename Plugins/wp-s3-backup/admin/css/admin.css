@@ -1,0 +1,123 @@
+/**
+ * WP S3 Backup — Admin Styles
+ */
+
+/* Status Bar */
+.wps3b-status-bar {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	background: #fff;
+	border: 1px solid #ccd0d4;
+	border-left: 4px solid #2271b1;
+	padding: 12px 16px;
+	margin: 15px 0;
+}
+
+.wps3b-status-item {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.wps3b-status-label {
+	font-weight: 600;
+	color: #1d2327;
+}
+
+.wps3b-status-ok {
+	color: #00a32a;
+}
+
+.wps3b-status-warn {
+	color: #dba617;
+}
+
+.wps3b-status-off {
+	color: #787c82;
+}
+
+.wps3b-status-err {
+	color: #d63638;
+}
+
+/* Test Connection */
+#wps3b-test-result {
+	margin-left: 10px;
+	font-style: italic;
+}
+
+#wps3b-test-result.wps3b-test-success {
+	color: #00a32a;
+	font-style: normal;
+}
+
+#wps3b-test-result.wps3b-test-error {
+	color: #d63638;
+	font-style: normal;
+}
+
+/* Backups Table */
+.wps3b-backups-table .wps3b-file-item {
+	margin-bottom: 4px;
+}
+
+.wps3b-backups-table .wps3b-file-item a {
+	text-decoration: none;
+}
+
+.wps3b-backups-table .wps3b-file-item a:hover {
+	text-decoration: underline;
+}
+
+.wps3b-backups-table .wps3b-file-size {
+	color: #787c82;
+	font-size: 12px;
+}
+
+.wps3b-delete-link {
+	color: #d63638;
+	text-decoration: none;
+}
+
+.wps3b-delete-link:hover {
+	color: #a00;
+	text-decoration: underline;
+}
+
+/* Log Levels */
+.wps3b-log-level {
+	display: inline-block;
+	padding: 2px 8px;
+	border-radius: 3px;
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.wps3b-log-info {
+	background: #e7f5fe;
+	color: #2271b1;
+}
+
+.wps3b-log-success {
+	background: #edfaef;
+	color: #00a32a;
+}
+
+.wps3b-log-warning {
+	background: #fef8ee;
+	color: #996800;
+}
+
+.wps3b-log-error {
+	background: #fcf0f1;
+	color: #d63638;
+}
+
+/* General */
+.wps3b-wrap h2 {
+	margin-top: 30px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid #ccd0d4;
+}

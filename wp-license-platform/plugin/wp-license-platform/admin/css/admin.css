@@ -1,0 +1,353 @@
+/**
+ * LicenseForge — Dark SaaS Admin UI
+ * Brand: Forge Product Family (Indigo/Purple accent)
+ */
+
+/* ─── Variables ──────────────────────────────── */
+:root {
+	--lf-bg: #0F172A;
+	--lf-bg-card: #1E293B;
+	--lf-bg-input: #0F172A;
+	--lf-border: #334155;
+	--lf-border-light: #475569;
+	--lf-text: #E5E7EB;
+	--lf-text-muted: #94A3B8;
+	--lf-text-dim: #64748B;
+	--lf-indigo: #6366F1;
+	--lf-indigo-dark: #4F46E5;
+	--lf-purple: #8B5CF6;
+	--lf-violet: #A78BFA;
+	--lf-indigo-glow: rgba(99,102,241,0.15);
+	--lf-indigo-glow-strong: rgba(99,102,241,0.3);
+	--lf-success: #22C55E;
+	--lf-success-bg: rgba(34,197,94,0.1);
+	--lf-warning: #F59E0B;
+	--lf-warning-bg: rgba(245,158,11,0.1);
+	--lf-danger: #EF4444;
+	--lf-danger-bg: rgba(239,68,68,0.1);
+	--lf-radius: 12px;
+	--lf-radius-sm: 8px;
+	--lf-radius-xs: 6px;
+	--lf-shadow: 0 1px 3px rgba(0,0,0,0.3);
+	--lf-shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+	--lf-shadow-glow: 0 0 20px var(--lf-indigo-glow);
+	--lf-transition: 0.2s ease;
+	--lf-font: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+}
+
+/* ─── Wrap ───────────────────────────────────── */
+.lf-wrap {
+	margin: -8px -20px 0 -2px;
+	padding: 24px;
+	background: var(--lf-bg);
+	font-family: var(--lf-font);
+	color: var(--lf-text);
+	min-height: calc(100vh - 32px);
+}
+
+.lf-wrap *, .lf-wrap *::before, .lf-wrap *::after { box-sizing: border-box; }
+
+/* ─── Header ─────────────────────────────────── */
+.lf-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 24px;
+}
+
+.lf-header__title {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	font-size: 22px;
+	font-weight: 700;
+	color: #fff;
+	margin: 0;
+	padding: 0;
+}
+
+.lf-header__icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	background: linear-gradient(135deg, var(--lf-indigo), var(--lf-purple));
+	border-radius: var(--lf-radius-sm);
+	box-shadow: var(--lf-shadow-glow);
+}
+
+.lf-header__icon .dashicons {
+	color: #fff;
+	font-size: 22px;
+	width: 22px;
+	height: 22px;
+}
+
+/* ─── WordPress notices ──────────────────────── */
+.lf-wrap .notice { background: var(--lf-bg-card); border-color: var(--lf-border); color: var(--lf-text); border-radius: var(--lf-radius-sm); }
+.lf-wrap .notice-success { border-left-color: var(--lf-success); }
+.lf-wrap .notice-error { border-left-color: var(--lf-danger); }
+.lf-wrap .notice-warning { border-left-color: var(--lf-warning); }
+.lf-wrap .notice p { color: var(--lf-text); }
+.lf-wrap .settings-error { background: var(--lf-bg-card); color: var(--lf-text); border-radius: var(--lf-radius-sm); }
+
+/* ─── Dashboard Stats ────────────────────────── */
+.lf-dashboard {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 16px;
+	margin-bottom: 24px;
+}
+
+.lf-stat-card {
+	background: var(--lf-bg-card);
+	border: 1px solid var(--lf-border);
+	border-radius: var(--lf-radius);
+	padding: 20px;
+	transition: all var(--lf-transition);
+	position: relative;
+	overflow: hidden;
+}
+
+.lf-stat-card::before {
+	content: '';
+	position: absolute;
+	top: 0; left: 0; right: 0;
+	height: 2px;
+	background: linear-gradient(90deg, transparent, var(--lf-indigo), transparent);
+	opacity: 0;
+	transition: opacity var(--lf-transition);
+}
+
+.lf-stat-card:hover { border-color: var(--lf-border-light); box-shadow: var(--lf-shadow-md); }
+.lf-stat-card:hover::before { opacity: 1; }
+
+.lf-stat-card__icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	border-radius: var(--lf-radius-sm);
+	margin-bottom: 12px;
+	font-size: 20px;
+}
+
+.lf-stat-card__icon--revenue { background: rgba(34,197,94,0.1); color: var(--lf-success); }
+.lf-stat-card__icon--orders { background: var(--lf-indigo-glow); color: var(--lf-indigo); }
+.lf-stat-card__icon--licenses { background: rgba(139,92,246,0.1); color: var(--lf-purple); }
+.lf-stat-card__icon--customers { background: rgba(59,130,246,0.1); color: #3b82f6; }
+
+.lf-stat-card__value {
+	display: block;
+	font-size: 24px;
+	font-weight: 800;
+	color: #fff;
+	line-height: 1.2;
+}
+
+.lf-stat-card__label {
+	font-size: 12px;
+	color: var(--lf-text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	margin-top: 4px;
+}
+
+/* ─── Cards ──────────────────────────────────── */
+.lf-card {
+	background: var(--lf-bg-card);
+	border: 1px solid var(--lf-border);
+	border-radius: var(--lf-radius);
+	overflow: hidden;
+	transition: all var(--lf-transition);
+	margin-bottom: 20px;
+}
+
+.lf-card:hover { border-color: var(--lf-border-light); box-shadow: var(--lf-shadow-md); }
+
+.lf-card__header {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 16px 20px;
+	border-bottom: 1px solid var(--lf-border);
+	font-size: 14px;
+	font-weight: 700;
+	color: #fff;
+}
+
+.lf-card__header .dashicons { color: var(--lf-indigo); font-size: 18px; width: 18px; height: 18px; }
+.lf-card__body { padding: 20px; }
+.lf-card__footer { padding: 14px 20px; border-top: 1px solid var(--lf-border); background: rgba(15,23,42,0.4); }
+
+/* ─── Buttons ────────────────────────────────── */
+.lf-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 9px 20px;
+	border-radius: var(--lf-radius-xs);
+	font-size: 13px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all var(--lf-transition);
+	border: none;
+	text-decoration: none;
+	font-family: var(--lf-font);
+}
+
+.lf-btn--primary {
+	background: linear-gradient(135deg, var(--lf-indigo), var(--lf-indigo-dark));
+	color: #fff;
+	box-shadow: 0 2px 8px var(--lf-indigo-glow-strong);
+}
+
+.lf-btn--primary:hover {
+	box-shadow: 0 4px 16px var(--lf-indigo-glow-strong), var(--lf-shadow-glow);
+	transform: translateY(-1px);
+	color: #fff;
+}
+
+.lf-btn--outline {
+	background: transparent;
+	border: 1px solid var(--lf-border);
+	color: var(--lf-text);
+}
+
+.lf-btn--outline:hover { border-color: var(--lf-indigo); color: var(--lf-indigo); }
+.lf-btn--sm { padding: 5px 14px; font-size: 12px; }
+.lf-btn .dashicons { font-size: 16px; width: 16px; height: 16px; }
+
+/* ─── Form Fields ────────────────────────────── */
+.lf-wrap input[type="text"],
+.lf-wrap input[type="password"],
+.lf-wrap input[type="email"],
+.lf-wrap input[type="url"],
+.lf-wrap input[type="number"],
+.lf-wrap select,
+.lf-wrap textarea {
+	background: var(--lf-bg-input);
+	border: 1px solid var(--lf-border);
+	color: var(--lf-text);
+	border-radius: var(--lf-radius-xs);
+	padding: 8px 12px;
+	font-size: 13px;
+	transition: border-color var(--lf-transition), box-shadow var(--lf-transition);
+}
+
+.lf-wrap input:focus,
+.lf-wrap select:focus,
+.lf-wrap textarea:focus {
+	border-color: var(--lf-indigo);
+	box-shadow: 0 0 0 3px var(--lf-indigo-glow);
+	outline: none;
+	background: var(--lf-bg-input);
+	color: var(--lf-text);
+}
+
+.lf-wrap .description { font-size: 12px; color: var(--lf-text-dim); margin-top: 4px; }
+.lf-wrap input::placeholder { color: var(--lf-text-dim); }
+.lf-wrap select { appearance: auto; }
+.lf-wrap code { background: rgba(99,102,241,0.1); color: var(--lf-violet); padding: 2px 8px; border-radius: 4px; }
+
+
+/* ─── Tables ─────────────────────────────────── */
+.lf-wrap .widefat { background: var(--lf-bg-card); border-color: var(--lf-border); color: var(--lf-text); }
+.lf-wrap .widefat th, .lf-wrap .widefat td { color: var(--lf-text); border-bottom-color: var(--lf-border); }
+.lf-wrap .widefat thead th { color: var(--lf-text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; background: rgba(15,23,42,0.4); }
+.lf-wrap .widefat.striped > tbody > :nth-child(odd) { background: rgba(15,23,42,0.2); }
+.lf-wrap .widefat a { color: var(--lf-violet); }
+.lf-wrap .widefat a:hover { color: var(--lf-indigo); }
+
+/* ─── Form Table Override ────────────────────── */
+.lf-wrap .form-table th { color: var(--lf-text); font-weight: 600; }
+.lf-wrap .form-table td { color: var(--lf-text); }
+.lf-wrap .form-table td .description { color: var(--lf-text-dim); }
+.lf-wrap .form-table td p.description { color: var(--lf-text-dim); }
+.lf-wrap h2 { color: #fff; border-bottom: 1px solid var(--lf-border); padding-bottom: 8px; margin-top: 28px; font-size: 16px; }
+.lf-wrap h3 { color: #fff; font-size: 15px; margin-top: 24px; }
+.lf-wrap label { color: var(--lf-text); }
+
+/* ─── Status Badges ──────────────────────────── */
+.wplp-status { display: inline-flex; align-items: center; padding: 3px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.wplp-status-completed, .wplp-status-active { background: var(--lf-success-bg); color: var(--lf-success); }
+.wplp-status-pending { background: var(--lf-warning-bg); color: var(--lf-warning); }
+.wplp-status-failed, .wplp-status-revoked { background: var(--lf-danger-bg); color: var(--lf-danger); }
+.wplp-status-expired, .wplp-status-inactive, .wplp-status-suspended { background: rgba(100,116,139,0.1); color: var(--lf-text-dim); }
+.wplp-status-refunded { background: var(--lf-indigo-glow); color: var(--lf-indigo); }
+
+/* ─── Page Title Action ──────────────────────── */
+.lf-wrap .page-title-action {
+	background: transparent;
+	border: 1px solid var(--lf-border);
+	color: var(--lf-text);
+	border-radius: var(--lf-radius-xs);
+	padding: 4px 12px;
+	font-size: 12px;
+	text-decoration: none;
+}
+.lf-wrap .page-title-action:hover { border-color: var(--lf-indigo); color: var(--lf-indigo); }
+
+/* ─── Product Edit ───────────────────────────── */
+.lf-wrap #wplp-tiers-table { background: var(--lf-bg-card); border-color: var(--lf-border); }
+.lf-wrap #wplp-tiers-table input[type="text"],
+.lf-wrap #wplp-tiers-table input[type="number"] { width: 100%; }
+.lf-wrap .wplp-remove-tier { color: var(--lf-danger); border-color: var(--lf-danger); }
+
+/* ─── File Upload ────────────────────────────── */
+.wplp-file-info {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 14px;
+	background: rgba(34,197,94,0.08);
+	border: 1px solid rgba(34,197,94,0.2);
+	border-radius: var(--lf-radius-xs);
+	margin-bottom: 8px;
+}
+.wplp-file-info .dashicons { color: var(--lf-success); font-size: 20px; width: 20px; height: 20px; }
+.wplp-file-missing { background: var(--lf-danger-bg); border-color: rgba(239,68,68,0.2); }
+.wplp-file-meta { color: var(--lf-text-dim); font-size: 12px; }
+#wplp-upload-status { font-size: 13px; }
+#wplp-upload-status.wplp-upload-error { color: var(--lf-danger); }
+#wplp-upload-status.wplp-upload-success { color: var(--lf-success); }
+
+/* ─── WP Button Overrides (inside our wrap) ─── */
+.lf-wrap .button {
+	background: var(--lf-bg-card);
+	border-color: var(--lf-border);
+	color: var(--lf-text);
+}
+.lf-wrap .button:hover { border-color: var(--lf-indigo); color: var(--lf-indigo); }
+.lf-wrap .button-primary {
+	background: linear-gradient(135deg, var(--lf-indigo), var(--lf-indigo-dark));
+	border-color: var(--lf-indigo);
+	color: #fff;
+	box-shadow: 0 2px 8px var(--lf-indigo-glow-strong);
+}
+.lf-wrap .button-primary:hover {
+	background: linear-gradient(135deg, var(--lf-indigo-dark), #4338CA);
+	color: #fff;
+	box-shadow: 0 4px 16px var(--lf-indigo-glow-strong);
+}
+.lf-wrap .button-small { font-size: 12px; }
+
+/* ─── Checkbox ───────────────────────────────── */
+.lf-wrap input[type="checkbox"] { accent-color: var(--lf-indigo); }
+
+/* ─── Welcome / Dashboard Hero ───────────────── */
+.lf-welcome-hero { text-align: center; padding: 40px 20px 20px; }
+.lf-welcome-hero h2 { font-size: 28px; margin: 0 0 8px; color: #fff; border: none; }
+.lf-welcome-hero p { font-size: 16px; color: var(--lf-text-muted); max-width: 500px; margin: 0 auto; }
+
+/* ─── Responsive ─────────────────────────────── */
+@media (max-width: 960px) {
+	.lf-dashboard { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+	.lf-wrap { padding: 16px; }
+	.lf-dashboard { grid-template-columns: 1fr; }
+	.lf-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
