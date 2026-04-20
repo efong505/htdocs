@@ -1,5 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <div class="wplp-portal">
+	<?php WPLP_Portal::render_nav(); ?>
 	<h2><?php esc_html_e( 'Downloads', 'wp-license-platform' ); ?></h2>
 	<?php if ( empty( $downloads ) ) : ?>
 		<p><?php esc_html_e( 'No downloads available. Purchase a product to access downloads.', 'wp-license-platform' ); ?></p>

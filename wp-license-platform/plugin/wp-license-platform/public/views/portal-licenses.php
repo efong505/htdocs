@@ -1,5 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <div class="wplp-portal">
+	<?php WPLP_Portal::render_nav(); ?>
 	<h2><?php esc_html_e( 'Your Licenses', 'wp-license-platform' ); ?></h2>
 	<?php if ( empty( $licenses ) ) : ?>
 		<p><?php esc_html_e( 'No licenses found.', 'wp-license-platform' ); ?></p>

@@ -1,5 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <div class="wplp-portal">
+	<?php WPLP_Portal::render_nav(); ?>
 	<h2><?php printf( esc_html__( 'Welcome, %s', 'wp-license-platform' ), esc_html( $customer->first_name ?: $customer->email ) ); ?></h2>
 	<div class="wplp-portal-grid">
 		<div class="wplp-portal-card">

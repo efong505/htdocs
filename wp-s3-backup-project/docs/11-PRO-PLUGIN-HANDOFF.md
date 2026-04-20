@@ -106,11 +106,22 @@ add_action( 'plugins_loaded', array( 'WPS3B_Pro', 'init' ), 20 );
 ```php
 class WPS3B_Pro_License {
 
-    // Your license platform API URL
-    const API_URL = 'https://ekewaka.com/wp-json/wplp/v1/';
+    // Default license platform API URL (configurable in settings)
+    const DEFAULT_API_URL = 'https://ekewaka.com/wp-json/wplp/v1/';
     const CACHE_KEY = 'wps3b_pro_license';
     const CACHE_TTL = DAY_IN_SECONDS;
     const GRACE_DAYS = 7;
+
+    /**
+     * Get the API URL — configurable in settings, falls back to default.
+     * This allows:
+     * - Testing against a local/staging License Platform
+     * - Changing the URL without a plugin update
+     */
+    public static function get_api_url() {
+        $url = get_option( 'wps3b_pro_api_url', self::DEFAULT_API_URL );
+        return trailingslashit( $url );
+    }
 
     public static function init() {
         add_action( 'admin_init', array( __CLASS__, 'daily_check' ) );
@@ -149,7 +160,7 @@ class WPS3B_Pro_License {
      * Validate license key against the API.
      */
     public static function validate( $key ) {
-        $response = wp_remote_post( self::API_URL . 'validate', array(
+        $response = wp_remote_post( self::get_api_url() . 'validate', array(
             'timeout' => 15,
             'body' => array(
                 'license_key' => $key,
@@ -201,7 +212,7 @@ class WPS3B_Pro_License {
         $result = self::validate( $key );
         if ( $result && ! empty( $result['valid'] ) ) {
             // Activate site against the license
-            wp_remote_post( self::API_URL . 'activate', array(
+            wp_remote_post( self::get_api_url() . 'activate', array(
                 'body' => array(
                     'license_key' => $key,
                     'site_url'    => get_site_url(),
@@ -224,7 +235,7 @@ class WPS3B_Pro_License {
 
         $key = get_option( 'wps3b_pro_license_key', '' );
         if ( $key ) {
-            wp_remote_post( self::API_URL . 'deactivate', array(
+            wp_remote_post( self::get_api_url() . 'deactivate', array(
                 'body' => array(
                     'license_key' => $key,
                     'site_url'    => get_site_url(),
@@ -255,10 +266,36 @@ class WPS3B_Pro_License {
 
 ### 1. License System (build first)
 - License key entry page under S3 Backup menu
+- **Configurable API URL field** (defaults to your production site, overridable for testing/staging)
 - Validation against your API
 - Daily re-check with grace period
-- Activation/deactivation
+- Activation/deactivation (must call /deactivate API to update site count on the License Platform)
 - This gates all other Pro features
+
+**License page should include these fields:**
+```php
+<!-- License Key -->
+<input type="text" name="wps3b_pro_license_key" value="..." />
+
+<!-- API URL (advanced, collapsed by default) -->
+<input type="url" name="wps3b_pro_api_url" 
+    value="<?php echo esc_attr( get_option( 'wps3b_pro_api_url', WPS3B_Pro_License::DEFAULT_API_URL ) ); ?>" />
+<p class="description">License server URL. Only change if instructed by support.</p>
+
+[Activate] [Deactivate]
+```
+
+**Save handler must include:**
+```php
+if ( isset( $_POST['wps3b_pro_api_url'] ) ) {
+    $url = esc_url_raw( wp_unslash( $_POST['wps3b_pro_api_url'] ) );
+    if ( ! empty( $url ) ) {
+        update_option( 'wps3b_pro_api_url', $url );
+    }
+}
+```
+
+**IMPORTANT:** When deactivating, the Pro plugin MUST call the `/deactivate` API endpoint so the License Platform decrements the site count. If this call fails or is skipped, the site count on the platform will be wrong.
 
 ### 2. Email Notifications
 **Hook:** `wps3b_after_backup` and `wps3b_backup_failed`

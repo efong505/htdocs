@@ -31,11 +31,13 @@ class WPLP_Checkout {
 		$has_checkout = has_shortcode( $post->post_content, 'wplp_checkout' );
 		$has_pricing  = has_shortcode( $post->post_content, 'wplp_pricing' );
 
-		if ( ! $has_checkout && ! $has_pricing ) {
+		$has_portal = preg_match( '/\[wplp_(portal|licenses|downloads|invoices|thank_you)/', $post->post_content );
+
+		if ( ! $has_checkout && ! $has_pricing && ! $has_portal ) {
 			return;
 		}
 
-		// CSS loads on both pricing and checkout
+		// CSS loads on all LicenseForge pages
 		wp_enqueue_style( 'wplp-public', WPLP_PLUGIN_URL . 'public/css/public.css', array(), WPLP_VERSION );
 
 		// PayPal SDK only loads on checkout

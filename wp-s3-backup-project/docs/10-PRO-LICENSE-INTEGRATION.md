@@ -151,12 +151,17 @@ wp-s3-backup-pro/
 ```php
 class WPS3B_Pro_License {
 
-    const API_URL    = 'https://ekewaka.com/wp-json/wplp/v1/';
+    const DEFAULT_API_URL = 'https://ekewaka.com/wp-json/wplp/v1/';
     const CACHE_KEY  = 'wps3b_license_data';
     const CACHE_TTL  = DAY_IN_SECONDS;
 
+    public static function get_api_url() {
+        $url = get_option( 'wps3b_pro_api_url', self::DEFAULT_API_URL );
+        return trailingslashit( $url );
+    }
+
     public static function validate( $license_key ) {
-        $response = wp_remote_post( self::API_URL . 'validate', array(
+        $response = wp_remote_post( self::get_api_url() . 'validate', array(
             'timeout' => 15,
             'body'    => array(
                 'license_key' => $license_key,

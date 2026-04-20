@@ -17,6 +17,7 @@ class WPLP_Portal {
 		add_shortcode( 'wplp_downloads', array( __CLASS__, 'render_downloads' ) );
 		add_shortcode( 'wplp_invoices', array( __CLASS__, 'render_invoices' ) );
 		add_action( 'init', array( __CLASS__, 'handle_download' ) );
+		add_action( 'init', array( __CLASS__, 'handle_view_invoice' ) );
 		add_action( 'init', array( __CLASS__, 'handle_deactivate_site' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_styles' ) );
 	}
@@ -28,6 +29,32 @@ class WPLP_Portal {
 				wp_enqueue_style( 'wplp-public', WPLP_PLUGIN_URL . 'public/css/public.css', array(), WPLP_VERSION );
 			}
 		}
+	}
+
+	/**
+	 * Render the portal navigation bar.
+	 */
+	public static function render_nav() {
+		$pages = get_option( 'wplp_pages', array() );
+		$nav_items = array(
+			'account'   => array( 'label' => 'Dashboard', 'icon' => 'dashicons-dashboard' ),
+			'licenses'  => array( 'label' => 'Licenses', 'icon' => 'dashicons-admin-network' ),
+			'downloads' => array( 'label' => 'Downloads', 'icon' => 'dashicons-download' ),
+			'invoices'  => array( 'label' => 'Invoices', 'icon' => 'dashicons-media-text' ),
+		);
+
+		$current_url = get_permalink();
+
+		echo '<nav class="wplp-portal-nav">';
+		foreach ( $nav_items as $key => $item ) {
+			$url = ! empty( $pages[ $key ] ) ? get_permalink( $pages[ $key ] ) : '#';
+			$active = ( $url && rtrim( $url, '/' ) === rtrim( $current_url, '/' ) ) ? ' wplp-nav-active' : '';
+			echo '<a href="' . esc_url( $url ) . '" class="wplp-nav-item' . $active . '">';
+			echo '<span class="dashicons ' . esc_attr( $item['icon'] ) . '"></span> ';
+			echo esc_html( $item['label'] );
+			echo '</a>';
+		}
+		echo '</nav>';
 	}
 
 	private static function get_customer() {
@@ -132,6 +159,50 @@ class WPLP_Portal {
 		), HOUR_IN_SECONDS );
 
 		return add_query_arg( 'wplp_download', $token, home_url( '/' ) );
+	}
+
+	public static function get_invoice_url( $order_id ) {
+		$token = wp_create_nonce( 'wplp_invoice_' . $order_id );
+		return add_query_arg( array(
+			'wplp_invoice' => absint( $order_id ),
+			'_wpnonce'     => $token,
+		), home_url( '/' ) );
+	}
+
+	public static function handle_view_invoice() {
+		if ( empty( $_GET['wplp_invoice'] ) ) {
+			return;
+		}
+		if ( ! is_user_logged_in() ) {
+			auth_redirect();
+		}
+
+		$order_id = absint( $_GET['wplp_invoice'] );
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ?? '' ) ), 'wplp_invoice_' . $order_id ) ) {
+			wp_die( esc_html__( 'Invalid invoice link.', 'wp-license-platform' ) );
+		}
+
+		$order    = WPLP_Order::find( $order_id );
+		$customer = self::get_customer();
+		if ( ! $order || ! $customer || (int) $order->customer_id !== (int) $customer->id ) {
+			wp_die( esc_html__( 'Invoice not found.', 'wp-license-platform' ) );
+		}
+		if ( 'completed' !== $order->status ) {
+			wp_die( esc_html__( 'Invoice not available.', 'wp-license-platform' ) );
+		}
+
+		$html = WPLP_Invoice::render_html( $order_id );
+
+		// Inject print/download toolbar before </body>.
+		$toolbar = '<div style="position:fixed;top:0;left:0;right:0;background:#1E293B;padding:10px 20px;display:flex;gap:12px;align-items:center;z-index:9999;box-shadow:0 2px 8px rgba(0,0,0,.3)">' .
+			'<button onclick="window.print()" style="background:linear-gradient(135deg,#6366F1,#4F46E5);color:#fff;border:none;padding:8px 20px;border-radius:6px;font-weight:600;cursor:pointer;font-size:13px">' . esc_html__( 'Print / Save as PDF', 'wp-license-platform' ) . '</button>' .
+			'<button onclick="history.back()" style="background:transparent;color:#94A3B8;border:1px solid #475569;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:13px">' . esc_html__( 'Back', 'wp-license-platform' ) . '</button>' .
+			'</div>' .
+			'<style>@media print{div[style*="position:fixed"]{display:none!important}body{padding-top:0!important}}</style>';
+		$html = str_replace( '<body>', '<body style="padding-top:60px">' . $toolbar, $html );
+
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Full HTML document.
+		exit;
 	}
 
 	public static function handle_download() {
