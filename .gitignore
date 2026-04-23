@@ -22,3 +22,5 @@ dashboard/
 *.tfstate
 *.tfstate.backup
 terraform.tfvars
+julias-graphic-design/
+Plugins/ed-social-share/

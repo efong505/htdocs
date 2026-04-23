@@ -453,6 +453,117 @@ add_filter( 'cron_schedules', function( $schedules ) {
 });
 ```
 
+### 11. Chunked Restore with AJAX Progress (AI1WM-style)
+
+The free plugin's restore runs as a single blocking PHP request — no progress feedback until completion. The Pro version should break the restore into chunks with real-time progress updates.
+
+**Architecture:**
+
+```
+User clicks Restore
+    │
+    ▼
+AJAX request 1: Download manifest from S3, show confirmation
+    │
+    ▼
+User confirms
+    │
+    ▼
+AJAX request 2: Download db.sql.gz from S3 → store in temp
+    │ (progress: "Downloading database... X%")
+    ▼
+AJAX request 3: Import DB in batches of 1000 statements
+    │ (progress: "Importing database... 3,500 / 12,000 statements")
+    │ (multiple AJAX calls, each processes 1000 statements)
+    ▼
+AJAX request 4: Download files.zip from S3 → store in temp
+    │ (progress: "Downloading files... X%")
+    ▼
+AJAX request 5+: Extract files in batches of 500
+    │ (progress: "Extracting files... 4,000 / 15,740")
+    │ (multiple AJAX calls, each extracts 500 files)
+    ▼
+AJAX request final: Cleanup temp files, disable maintenance mode
+    │ (progress: "Restore complete!")
+    ▼
+Done
+```
+
+**Key implementation details:**
+
+1. **State tracking** — Store restore progress in a transient or custom option:
+```php
+update_option( 'wps3b_restore_state', array(
+    'step'       => 'extract_files',  // current step
+    'total'      => 15740,            // total items in current step
+    'processed'  => 4000,             // items completed
+    'temp_dir'   => '/path/to/temp/', // where downloaded files are
+    'timestamp'  => $backup_timestamp,
+) );
+```
+
+2. **AJAX endpoint** — Each call reads the state, processes a batch, updates state, returns progress:
+```php
+add_action( 'wp_ajax_wps3b_pro_restore_step', function() {
+    check_ajax_referer( 'wps3b_pro_restore' );
+    $state = get_option( 'wps3b_restore_state' );
+    
+    switch ( $state['step'] ) {
+        case 'download_db':
+            // Download db.sql.gz from S3
+            // Update state to 'import_db'
+            break;
+        case 'import_db':
+            // Read next 1000 SQL statements from file
+            // Execute them
+            // Update processed count
+            // If done, move to 'download_files'
+            break;
+        case 'download_files':
+            // Download files.zip from S3
+            // Update state to 'extract_files'
+            break;
+        case 'extract_files':
+            // Extract next 500 files from zip
+            // Update processed count
+            // If done, move to 'cleanup'
+            break;
+        case 'cleanup':
+            // Remove temp files, disable maintenance mode
+            // Delete state option
+            break;
+    }
+    
+    wp_send_json_success( array(
+        'step'      => $state['step'],
+        'total'     => $state['total'],
+        'processed' => $state['processed'],
+        'message'   => $progress_message,
+        'complete'  => $is_done,
+    ) );
+});
+```
+
+3. **JavaScript polling** — Client calls the endpoint repeatedly:
+```javascript
+function runRestoreStep() {
+    $.post(ajaxurl, { action: 'wps3b_pro_restore_step', nonce: nonce }, function(res) {
+        updateProgressBar(res.data.processed, res.data.total, res.data.message);
+        if (!res.data.complete) {
+            runRestoreStep(); // Next chunk
+        } else {
+            showSuccess();
+        }
+    });
+}
+```
+
+4. **Timeout protection** — Each AJAX call should complete within 30 seconds. If a batch takes too long, reduce batch size.
+
+5. **Resume capability** — If the browser is closed mid-restore, the state is saved. Returning to the restore page detects the in-progress state and offers to resume or cancel.
+
+This is the same pattern All-in-One WP Migration uses — chunked processing with AJAX polling for progress.
+
 ---
 
 ## Available Hooks in the Free Plugin
@@ -497,7 +608,8 @@ wps3b_is_pro_active()  // Returns true when Pro plugin is installed + licensed
 7. **Selective restore** — UI changes + parameter passing
 8. **Backup encryption** — file processing before upload
 9. **URL replacement** — complex serialization handling
-10. **Incremental backups** — most complex, build last
+10. **Incremental backups** — complex file diffing
+11. **Chunked restore with progress** — most complex, refactors restore architecture
 
 ---
 

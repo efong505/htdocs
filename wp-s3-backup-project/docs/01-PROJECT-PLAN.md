@@ -415,6 +415,7 @@ wp-s3-backup/
 - [ ] Multi-site support
 - [ ] White-label
 - [ ] License key validation against WP License Platform
+- [ ] Chunked restore with AJAX progress (AI1WM-style real-time progress bar)
 
 ---
 

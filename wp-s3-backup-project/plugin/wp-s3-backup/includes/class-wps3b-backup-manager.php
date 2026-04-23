@@ -72,8 +72,14 @@ class WPS3B_Backup_Manager {
 		if ( ! empty( $settings['s3_prefix'] ) ) {
 			$prefix = $settings['s3_prefix'];
 		} else {
-			$site_name = sanitize_title( wp_parse_url( get_site_url(), PHP_URL_HOST ) );
-			$prefix    = 'backups/' . $site_name;
+			$url  = get_site_url();
+			$host = wp_parse_url( $url, PHP_URL_HOST );
+			$path = wp_parse_url( $url, PHP_URL_PATH );
+			$site_name = sanitize_title( $host );
+			if ( ! empty( $path ) && '/' !== $path ) {
+				$site_name .= '-' . sanitize_title( trim( $path, '/' ) );
+			}
+			$prefix = 'backups/' . $site_name;
 		}
 
 		$prefix = apply_filters( 'wps3b_s3_path_prefix', $prefix );

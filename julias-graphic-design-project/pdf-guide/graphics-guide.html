@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Business Owner's Guide to Graphics That Actually Sell</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito+Sans:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: letter;
+            margin: 0.75in;
+        }
+        @media print {
+            html, body {
+                margin: 0;
+                padding: 0;
+            }
+
+            .print-btn {
+                display: none;
+            }
+
+            .page-break {
+                break-after: page;
+                page-break-after: always;
+            }
+
+            .cover {
+                min-height: auto;
+                height: auto;
+                max-height: none;
+                overflow: visible;
+                break-after: page;
+                page-break-after: always;
+                
+                background: linear-gradient(160deg, var(--espresso) 0%, #4A3B35 100%);
+            }
+        }
+
+        /* @media print {
+            .page-break {
+                page-break-after: always;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .cover {
+                height: 9.5in;
+                min-height: unset;
+                max-height: 9.5in;
+                overflow: hidden;
+                page-break-after: always;
+            }
+        } */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --terra: #C4725A;
+            --rose: #D4A08A;
+            --cream: #FBF8F4;
+            --espresso: #2C2220;
+            --charcoal: #3D3330;
+            --gray: #6B5E56;
+            --linen: #F3EDE6;
+            --deep-terra: #B85E48;
+        }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            color: var(--charcoal);
+            line-height: 1.7;
+            font-size: 11pt;
+            background: #fff;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--charcoal);
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 28pt;
+        }
+
+        h2 {
+            font-size: 20pt;
+            margin-bottom: 0.5em;
+        }
+
+        h3 {
+            font-size: 14pt;
+            margin: 1.5em 0 0.5em;
+            color: var(--terra);
+        }
+
+        p {
+            margin-bottom: 1em;
+            color: var(--gray);
+        }
+
+        ul,
+        ol {
+            margin: 0.5em 0 1em 1.5em;
+            color: var(--gray);
+        }
+
+        li {
+            margin-bottom: 0.4em;
+        }
+
+        strong {
+            color: var(--charcoal);
+        }
+
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(160deg, var(--espresso) 0%, #4A3B35 100%);
+            color: var(--cream);
+            padding: 3rem;
+            page-break-after: always;
+        }
+
+        .cover h1 {
+            color: var(--cream);
+            font-size: 32pt;
+            margin-bottom: 0.3em;
+            max-width: 600px;
+        }
+
+        .cover .subtitle {
+            font-size: 13pt;
+            color: var(--rose);
+            margin-bottom: 2em;
+            max-width: 500px;
+        }
+
+        .cover .author {
+            font-size: 11pt;
+            color: var(--rose);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.5em;
+        }
+
+        .cover .website {
+            font-size: 10pt;
+            color: rgba(251, 248, 244, 0.5);
+        }
+
+        .cover .divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--terra), var(--rose), transparent);
+            margin: 1.5em auto;
+        }
+
+        .page {
+            padding: 0.5in 20%;
+        }
+
+        .page-num {
+            font-size: 9pt;
+            color: var(--rose);
+            text-align: center;
+            margin-top: 2em;
+        }
+
+        .principle-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 48pt;
+            color: var(--linen);
+            font-weight: 700;
+            float: left;
+            margin: -0.1em 0.2em 0 -0.05em;
+            line-height: 1;
+        }
+
+        .example-box {
+            background: var(--linen);
+            border-radius: 8px;
+            padding: 1em 1.2em;
+            margin: 1em 0;
+        }
+
+        .example-box.bad {
+            border-left: 3px solid var(--deep-terra);
+        }
+
+        .example-box.good {
+            border-left: 3px solid #5a9a6a;
+        }
+
+        .example-label {
+            font-size: 9pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.3em;
+        }
+
+        .example-label.bad {
+            color: var(--deep-terra);
+        }
+
+        .example-label.good {
+            color: #5a9a6a;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5em;
+            margin: 1em 0;
+        }
+
+        .color-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            font-size: 10pt;
+        }
+
+        .color-swatch {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li {
+            padding: 0.3em 0;
+            padding-left: 1.5em;
+            position: relative;
+        }
+
+        .checklist li::before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            color: var(--terra);
+            font-size: 12pt;
+        }
+
+        .score-box {
+            background: var(--espresso);
+            color: var(--cream);
+            border-radius: 8px;
+            padding: 1.2em;
+            margin: 1.5em 0;
+        }
+
+        .score-box h3 {
+            color: var(--rose);
+            margin-top: 0;
+        }
+
+        .score-box p {
+            color: var(--rose);
+        }
+
+        .score-box strong {
+            color: var(--cream);
+        }
+
+        .cta-box {
+            background: var(--linen);
+            border-radius: 10px;
+            padding: 1.5em;
+            text-align: center;
+            margin: 1.5em 0;
+        }
+
+        .cta-box h3 {
+            color: var(--terra);
+            margin-top: 0;
+        }
+
+        .footer-line {
+            font-size: 9pt;
+            color: var(--rose);
+            text-align: center;
+            margin-top: 1em;
+        }
+
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--terra);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 11pt;
+            font-weight: 700;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s;
+        }
+
+        .print-btn:hover {
+            background: var(--deep-terra);
+        }
+
+        @media print {
+            .print-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn" onclick="window.print()">Download as PDF</button>
+
+    <!-- COVER -->
+    <div class="cover">
+        <div class="author">By Julia Fong — Fine Artist & Graphic Designer</div>
+        <div class="divider"></div>
+        <h1>The Business Owner's Guide to Graphics That Actually Sell</h1>
+        <p class="subtitle">7 Design Principles That Turn Your Marketing Materials From Forgettable to Profitable</p>
+        <div class="divider"></div>
+        <p class="website"><a href="https://juliasgraphicdesign.com" style="color:rgba(251,248,244,0.5);text-decoration:none;">juliasgraphicdesign.com</a></p>
+    </div>
+
+    <!-- INTRODUCTION -->
+    <div class="page">
+        <h2>Why Most Business Graphics Fail</h2>
+        <p>Most business owners spend money on graphic design and never see a return. Their logo looks "fine," their
+            business cards are "okay," and their marketing materials get tossed in the trash.</p>
+        <p>The problem is not that they hired a bad designer (though sometimes that is the case). The problem is that
+            their graphics were designed to look pretty instead of designed to sell.</p>
+        <p>There is a difference.</p>
+        <p><strong>Pretty graphics win design awards. Effective graphics win customers.</strong></p>
+        <p>In this guide, I am going to share 7 design principles that bridge the gap between "looks nice" and "makes
+            money." These are the same principles I use for every client project, and they work whether you are
+            designing a logo, a brochure, a business card, or a social media post.</p>
+        <p>Plus, at the end, you will find a Brand Identity Checklist you can use to audit your own business graphics
+            today.</p>
+        <p>Let's get started.</p>
+        <div class="page-num">2</div>
+    </div>
+    <div class="page-break"></div>
+
+    <!-- PRINCIPLE 1 -->
+    <div class="page">
+        <div class="principle-num">1</div>
+        <h2>Start With Your Customer, Not Your Logo</h2>
+        <p>The #1 mistake I see in business graphics: they talk about the business instead of the customer.</p>
+        <p>Your customer does not care about your mission statement. They care about their problem and whether you can
+            solve it.</p>
+        <div class="example-box bad">
+            <p class="example-label bad">✗ Bad Example</p>
+            <p style="margin:0;"><strong>"Smith & Associates — Providing Excellence Since 1985"</strong></p>
+        </div>
+        <div class="example-box good">
+            <p class="example-label good">✓ Better Example</p>
+            <p style="margin:0;"><strong>"Stop losing sleep over your taxes. We handle everything so you don't have
+                    to."</strong></p>
+        </div>
+        <p><strong>The principle:</strong> Every piece of graphic design should answer one question from the customer's
+            perspective: "What's in it for me?"</p>
+        <h3>Quick Exercise</h3>
+        <p>Look at your current business card or brochure. Count how many times it says "we," "our," or your company
+            name versus how many times it addresses the customer's problem. If it is mostly about you, it is time for a
+            rewrite.</p>
+        <div class="page-num">3</div>
+    </div>
+    <div class="page-break"></div>
+
+    <!-- PRINCIPLE 2 -->
+    <div class="page">
+        <div class="principle-num">2</div>
+        <h2>Guide the Eye With Visual Hierarchy</h2>
+        <p>When someone looks at your flyer, business card, or website, their eye follows a path. Visual hierarchy is
+            how you control that path.</p>
+        <h3>The Rules</h3>
+        <ul>
+            <li><strong>Biggest text</strong> = most important (your headline or key message)</li>
+            <li><strong>Medium text</strong> = supporting information</li>
+            <li><strong>Smallest text</strong> = details (phone number, address, fine print)</li>
+        </ul>
+        <p><strong>Common mistake:</strong> Making everything the same size. When everything is emphasized, nothing is
+            emphasized.</p>
+        <h3>The F-Pattern</h3>
+        <p>On print and web, people scan in an F-shape — across the top, then down the left side. Put your most
+            important message in the top-left area.</p>
+        <h3>The Z-Pattern</h3>
+        <p>For simpler layouts (like a postcard or ad), the eye moves in a Z — top-left to top-right, then diagonally to
+            bottom-left, then across to bottom-right. Put your call-to-action in the bottom-right.</p>
+        <div class="page-num">4</div>
+    </div>
+    <div class="page-break"></div>
+
+    <!-- PRINCIPLE 3 -->
+    <div class="page">
+        <div class="principle-num">3</div>
+        <h2>Less Is More — The Power of White Space</h2>
+        <p>White space (also called negative space) is not wasted space. It is breathing room that makes your design
+            easier to read and more professional.</p>
+        <h3>The Squint Test</h3>
+        <p>Hold your marketing material at arm's length and squint. Can you tell what is most important? If everything
+            blurs into a wall of text and images, your design is too cluttered.</p>
+        <h3>What to Cut</h3>
+        <ul>
+            <li>Remove any text that does not directly help the customer take action</li>
+            <li>Use one hero image instead of five small ones</li>
+            <li>Limit yourself to 2–3 colors maximum</li>
+            <li>Leave margins alone — do not fill every inch</li>
+        </ul>
+        <p><strong>The luxury principle:</strong> Notice how high-end brands (Apple, Chanel, Tesla) use massive amounts
+            of white space. It communicates confidence and quality. Cluttered design communicates desperation.</p>
+        <div class="page-num">5</div>
+    </div>
+    <div class="page-break"></div>
+
+    <!-- PRINCIPLE 4 -->
+    <div class="page">
+        <div class="principle-num">4</div>
+        <h2>Color Psychology Is Real</h2>
+        <p>Colors trigger emotions and associations whether you intend them to or not. Choosing the right colors for
+            your brand is not about personal preference — it is about what you want your customer to feel.</p>
+        <h3>Quick Reference</h3>
+        <div class="color-grid">
+            <div class="color-item">
+                <div class="color-swatch" style="background:#DC3545;"></div><strong>Red:</strong> Energy, urgency,
+                passion
+            </div>
+            <div class="color-item">
+                <div class="color-swatch" style="background:#2B7A9B;"></div><strong>Blue:</strong> Trust, stability,
+                professionalism
+            </div>
+            <div class="color-item">
+                <div class="color-swatch" style="background:#5a9a6a;"></div><strong>Green:</strong> Growth, health,
+                nature
+            </div>
+            <div class="color-item">
+                <div class="color-swatch" style="background:#F0A030;"></div><strong>Yellow/Orange:</strong> Optimism,
+                creativity, warmth
+            </div>
+            <div class="color-item">
+                <div class="color-swatch" style="background:#7B5EA7;"></div><strong>Purple:</strong> Luxury, wisdom,
+                creativity
+            </div>
+            <div class="color-item">
+                <div class="color-swatch" style="background:#222;"></div><strong>Black:</strong> Sophistication, power,
+                elegance
+            </div>
+            <div class="color-item">
+                <div class="color-swatch" style="background:#E88DA0;"></div><strong>Pink:</strong> Femininity, care,
+                playfulness
+            </div>
+            <div class="color-item">
+                <div class="color-swatch" style="background:#C4725A;"></div><strong>Terracotta:</strong> Warmth,
+                reliability, handcrafted
+            </div>
+        </div>
+        <p><strong>The rule:</strong> Choose 2–3 colors maximum for your brand. One primary, one secondary, one accent.
+            Use them consistently everywhere.</p>
+        <div class="page-num">6</div>
+    </div>
+    <div class="page-break"></div>
+
+    <!-- PRINCIPLE 5 -->
+    <div class="page">
+        <div class="principle-num">5</div>
+        <h2>Typography Speaks Before Words Do</h2>
+        <p>The font you choose communicates a message before anyone reads a single word.</p>
+        <h3>Font Types</h3>
+        <p><strong>Serif fonts</strong> (with small feet/tails, like this guide's headings): Traditional, trustworthy,
+            established. Good for law firms, financial services, luxury brands.</p>
+        <p><strong>Sans-serif fonts</strong> (clean, without tails, like this guide's body text): Modern, clean,
+            approachable. Good for tech, startups, healthcare, casual brands.</p>
+        <p><strong>Script fonts</strong> (handwriting-style): Personal, elegant, creative. Good for invitations and
+            beauty brands. Use sparingly — never for body text.</p>
+        <h3>The 2-Font Rule</h3>
+        <p>Use a maximum of 2 fonts in any design. One for headings, one for body text. That is it. More than 2 fonts
+            looks chaotic.</p>
+        <h3>Fonts to Avoid in Professional Materials</h3>
+        <ul>
+            <li>Comic Sans (never)</li>
+            <li>Papyrus (never)</li>
+            <li>Curlz MT (never)</li>
+            <li>Any font that came free with Microsoft Word in 2003</li>
+        </ul>
+        <div class="page-num">7</div>
+    </div>
+    <div class="page-break"></div>
+
+    <!-- PRINCIPLE 6 -->
+    <div class="page">
+        <div class="principle-num">6</div>
+        <h2>Consistency Builds Trust</h2>
+        <p>Every time a customer sees your business — your card, your website, your social media, your storefront — it
+            should look like it belongs to the same brand.</p>
+        <div class="example-box bad">
+            <p class="example-label bad">Inconsistency says:</p>
+            <p style="margin:0;">"This business is disorganized."</p>
+        </div>
+        <div class="example-box good">
+            <p class="example-label good">Consistency says:</p>
+            <p style="margin:0;">"This business is professional and pays attention to detail."</p>
+        </div>
+        <h3>What Needs to Be Consistent</h3>
+        <ul>
+            <li><strong>Logo</strong> — same version everywhere</li>
+            <li><strong>Colors</strong> — same hex codes, not "close enough"</li>
+            <li><strong>Fonts</strong> — same 2 fonts across all materials</li>
+            <li><strong>Tone</strong> — same voice in all copy</li>
+            <li><strong>Image style</strong> — same photo treatment, same illustration style</li>
+        </ul>
+        <p><strong>The fix:</strong> Create a simple brand style guide. Even a one-page document with your logo, colors
+            (with hex codes), and fonts is enough to keep everything consistent.</p>
+        <div class="page-num">8</div>
+    </div>
+    <div class="page-break"></div>
+
+    <!-- PRINCIPLE 7 -->
+    <div class="page">
+        <div class="principle-num">7</div>
+        <h2>Professional Graphics Pay for Themselves</h2>
+        <p>This is the principle most business owners resist: spending money on design.</p>
+        <p>But here is the math:</p>
+        <p>A cheap logo from a template site costs $50. It looks like 10,000 other businesses. Customers glance at your
+            card and feel nothing. You blend in.</p>
+        <p>A professional logo costs $750. It is original, hand-crafted, and designed specifically for your business.
+            Customers see your card and think "this looks legit." They call you instead of your competitor.</p>
+        <p><strong>If that professional logo helps you win even 2 extra clients in the first year, it has paid for
+                itself many times over.</strong></p>
+        <h3>The Real Cost of Cheap Design</h3>
+        <ul>
+            <li>Lost credibility with potential customers</li>
+            <li>Having to rebrand within 1–2 years (paying twice)</li>
+            <li>Inconsistent materials that confuse your market</li>
+            <li>Looking less professional than competitors who invested in design</li>
+        </ul>
+        <p><strong>The bottom line:</strong> Graphic design is not an expense. It is an investment in how the world
+            perceives your business. And perception drives purchasing decisions.</p>
+        <div class="page-num">9</div>
+    </div>
+    <div class="page-break"></div>
+
+    <!-- CHECKLIST -->
+    <div class="page">
+        <h2>Your Brand Identity Checklist</h2>
+        <p>Check off each item you have. Any gaps are opportunities to strengthen your brand.</p>
+        <h3>Logo</h3>
+        <ul class="checklist">
+            <li>Primary logo (full color)</li>
+            <li>Logo variation for dark backgrounds</li>
+            <li>Logo variation for small sizes (favicon, social media icon)</li>
+            <li>Vector file format (AI, EPS, or SVG)</li>
+            <li>High-resolution PNG (at least 2000px wide)</li>
+        </ul>
+        <h3>Colors</h3>
+        <ul class="checklist">
+            <li>Primary brand color with hex code</li>
+            <li>Secondary brand color with hex code</li>
+            <li>Accent color with hex code</li>
+            <li>Colors documented and shared with anyone who creates materials</li>
+        </ul>
+        <h3>Typography</h3>
+        <ul class="checklist">
+            <li>Heading font chosen and documented</li>
+            <li>Body text font chosen and documented</li>
+            <li>Font files or Google Fonts links available</li>
+        </ul>
+        <h3>Business Materials</h3>
+        <ul class="checklist">
+            <li>Business cards (professionally designed and printed)</li>
+            <li>Letterhead template</li>
+            <li>Email signature with logo</li>
+            <li>Invoice or proposal template with branding</li>
+        </ul><br><br>
+        <h3>Digital Presence</h3>
+        <ul class="checklist">
+            <li>Website with consistent branding</li>
+            <li>Social media profile images (same logo/style across platforms)</li>
+            <li>Social media cover images</li>
+            <li>Email newsletter template</li>
+        </ul>
+        <h3>Marketing Materials</h3>
+        <ul class="checklist">
+            <li>Brochure or flyer (if applicable)</li>
+            <li>Presentation template</li>
+            <li>Signage or banner (if applicable)</li>
+        </ul>
+        <div class="score-box">
+            <h3>How Did You Score?</h3>
+            <p><strong>15+ checked:</strong> Your brand is in great shape.<br>
+                <strong>10–14 checked:</strong> Solid foundation, some gaps to fill.<br>
+                <strong>5–9 checked:</strong> Significant gaps — your brand is inconsistent.<br>
+                <strong>Under 5:</strong> Time for a professional brand identity package.
+            </p>
+        </div>
+        <div class="page-num">10</div>
+    </div>
+    <div class="page-break"></div>
+
+    <!-- ABOUT + CTA -->
+    <div class="page">
+        <h2>About the Author</h2>
+        <p><strong>Julia Fong</strong> is a fine artist and graphic designer based in Albuquerque, New Mexico. With over
+            four decades of drawing experience, she brings a hand-crafted approach to every project — starting with a
+            pencil sketch before translating it into polished digital design.</p>
+        <p>Julia works alongside her husband Ed, who brings 20+ years of direct response marketing expertise. Together,
+            they create graphics that look beautiful and drive results.</p>
+        <h3>Services</h3>
+        <ul>
+            <li>Logo & Brand Identity — starting at $750</li>
+            <li>Marketing Materials & Print Design — starting at $300</li>
+            <li>Illustration & Custom Art — starting at $500</li>
+            <li>Web & Digital Design — starting at $300</li>
+            <li>Photography — starting at $250</li>
+        </ul>
+        <div class="cta-box">
+            <h3>Ready to Upgrade Your Graphics?</h3>
+            <p>Schedule a free 30-minute consultation and let's talk about bringing your vision to life.</p>
+            <p style="margin-bottom:0.5em;"><strong>Website:</strong> juliasgraphicdesign.com</p>
+            <p style="margin-bottom:0.5em;"><strong>Email:</strong> juliasgraphicdesign@gmail.com</p>
+            <p style="margin-bottom:0.5em;"><strong>Phone:</strong> (520) 392-5924</p>
+        </div>
+        <p style="text-align:center;margin-top:1.5em;"><strong>Browse and purchase original art:</strong><br><a
+                href="https://www.etsy.com/shop/USA1stStickersNArt"
+                style="color:var(--terra);text-decoration:none;">etsy.com/shop/USA1stStickersNArt</a></p>
+        <div class="footer-line">© 2026 Julia's Graphic Design. All rights reserved.</div>
+    </div>
+
+</body>
+
+</html>

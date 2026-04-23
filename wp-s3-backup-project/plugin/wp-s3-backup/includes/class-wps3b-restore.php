@@ -296,6 +296,15 @@ class WPS3B_Restore {
 			return new WP_Error( 'wps3b_gz_open', __( 'Could not open database dump file.', 'wp-s3-backup' ) );
 		}
 
+		// Detect the backup's table prefix by scanning for CREATE TABLE statements
+		$backup_prefix = self::detect_backup_prefix( $gz_path );
+		$current_prefix = $wpdb->prefix;
+		$needs_prefix_swap = ( $backup_prefix && $backup_prefix !== $current_prefix );
+
+		if ( $needs_prefix_swap ) {
+			WPS3B_Logger::info( sprintf( 'Table prefix mismatch detected: backup uses "%s", site uses "%s". Auto-converting.', $backup_prefix, $current_prefix ) );
+		}
+
 		$wpdb->query( 'SET foreign_key_checks = 0' ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$wpdb->query( "SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO'" ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
@@ -317,6 +326,11 @@ class WPS3B_Restore {
 				continue;
 			}
 
+			// Replace table prefix if needed
+			if ( $needs_prefix_swap ) {
+				$line = self::replace_table_prefix( $line, $backup_prefix, $current_prefix );
+			}
+
 			$statement .= $line;
 
 			// Execute when we hit a semicolon at the end of a line
@@ -324,7 +338,6 @@ class WPS3B_Restore {
 				$result = $wpdb->query( $statement ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 				if ( false === $result && ! empty( $wpdb->last_error ) ) {
 					$errors[] = sprintf( 'Line %d: %s', $line_number, $wpdb->last_error );
-					// Continue — don't stop on individual statement errors
 				}
 				$statement = '';
 			}
@@ -338,11 +351,88 @@ class WPS3B_Restore {
 
 		$wpdb->query( 'SET foreign_key_checks = 1' ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
+		// Update wp_options siteurl and home to match current site
+		$wpdb->update(
+			$current_prefix . 'options',
+			array( 'option_value' => get_site_url() ),
+			array( 'option_name' => 'siteurl' )
+		);
+		$wpdb->update(
+			$current_prefix . 'options',
+			array( 'option_value' => get_home_url() ),
+			array( 'option_name' => 'home' )
+		);
+
 		if ( ! empty( $errors ) ) {
 			WPS3B_Logger::error( 'Database import had ' . count( $errors ) . ' errors. First: ' . $errors[0] );
 		}
 
 		return true;
+	}
+
+	/**
+	 * Detect the table prefix used in a SQL dump file.
+	 *
+	 * Scans for CREATE TABLE statements and extracts the prefix
+	 * by looking for known WordPress table names (options, posts, users).
+	 *
+	 * @param string $gz_path Path to the .sql.gz file.
+	 * @return string Detected prefix (e.g., 'wp_', 'wpou_') or empty string.
+	 */
+	private static function detect_backup_prefix( $gz_path ) {
+		$gz = gzopen( $gz_path, 'rb' );
+		if ( ! $gz ) {
+			return '';
+		}
+
+		$known_tables = array( 'options', 'posts', 'users', 'postmeta', 'usermeta', 'comments', 'terms' );
+		$prefix = '';
+
+		while ( ! gzeof( $gz ) ) {
+			$line = gzgets( $gz );
+			if ( false === $line ) {
+				break;
+			}
+
+			// Look for CREATE TABLE or DROP TABLE statements
+			if ( preg_match( '/(?:CREATE TABLE|DROP TABLE IF EXISTS)\s+`([^`]+)`/', $line, $matches ) ) {
+				$table_name = $matches[1];
+				foreach ( $known_tables as $known ) {
+					if ( substr( $table_name, -strlen( $known ) ) === $known ) {
+						$prefix = substr( $table_name, 0, strlen( $table_name ) - strlen( $known ) );
+						gzclose( $gz );
+						return $prefix;
+					}
+				}
+			}
+		}
+
+		gzclose( $gz );
+		return $prefix;
+	}
+
+	/**
+	 * Replace table prefix in a SQL line.
+	 *
+	 * Handles: CREATE TABLE, DROP TABLE, INSERT INTO, and references
+	 * within data (e.g., wp_options stored in serialized data won't be
+	 * changed — only SQL structural references).
+	 *
+	 * @param string $line       SQL line.
+	 * @param string $old_prefix Old prefix (e.g., 'wp_').
+	 * @param string $new_prefix New prefix (e.g., 'wpou_').
+	 * @return string Modified line.
+	 */
+	private static function replace_table_prefix( $line, $old_prefix, $new_prefix ) {
+		// Replace in SQL structural statements: CREATE TABLE, DROP TABLE, INSERT INTO, LOCK TABLES, etc.
+		$patterns = array(
+			'/`' . preg_quote( $old_prefix, '/' ) . '/',  // `wp_tablename`
+		);
+		$replacements = array(
+			'`' . $new_prefix,
+		);
+
+		return preg_replace( $patterns, $replacements, $line );
 	}
 
 	/**

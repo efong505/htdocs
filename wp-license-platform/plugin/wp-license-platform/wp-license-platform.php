@@ -3,7 +3,7 @@
  * Plugin Name: WP License Platform
  * Plugin URI:  https://ekewaka.com/wp-license-platform
  * Description: Sell digital products with PayPal, license key management, global VAT compliance, and a customer portal. Zero per-transaction fees.
- * Version:     1.0.0
+ * Version:     1.0.1
  * Author:      Edward Fong
  * Author URI:  https://ekewaka.com
  * License:     GPL-2.0-or-later
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPLP_VERSION', '1.0.0' );
+define( 'WPLP_VERSION', '1.0.1' );
 define( 'WPLP_PLUGIN_FILE', __FILE__ );
 define( 'WPLP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WPLP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
