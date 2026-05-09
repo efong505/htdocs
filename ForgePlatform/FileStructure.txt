@@ -1,0 +1,286 @@
+Folder PATH listing
+Volume serial number is 0000007D FA07:0CB3
+C:.
+|   FileStructure.txt
+|   
++---docs
+|   |   00-master-context.md
+|   |   06-platform-architecture.md
+|   |   
+|   +---architecture
+|   +---branding
+|   +---implementation
+|   \---products
++---drip-forge-project
+|   |   README.md
+|   |   
+|   +---docs
+|   |       01-PROJECT-PLAN.md
+|   |       02-EMAIL-ENGINE-GUIDE.md
+|   |       03-PROJECT-STATUS.md
+|   |       04-MONETIZATION-STRATEGY.md
+|   |       05-DRIPFORGE-CREATIVE-HANDOFF.md
+|   |       
+|   \---plugin
+|       |   nl-drip-engine.zip
+|       |   
+|       \---nl-drip-engine
+|           |   nl-drip-engine.php
+|           |   readme.txt
+|           |   
+|           +---admin
+|           |   |   class-admin-menu.php
+|           |   |   
+|           |   +---assets
+|           |   |       nlde-admin.css
+|           |   |       
+|           |   \---views
+|           |           activity.php
+|           |           dashboard.php
+|           |           guide.php
+|           |           sequence-edit.php
+|           |           sequences.php
+|           |           settings.php
+|           |           subscribers.php
+|           |           templates.php
+|           |           
+|           +---assets
+|           |       banner-772x250.png
+|           |       banner-772x250.psd
+|           |       icon-256x256.png
+|           |       
+|           +---includes
+|           |       class-analytics.php
+|           |       class-cron.php
+|           |       class-drip-sequence.php
+|           |       class-email-sender.php
+|           |       class-subscriber.php
+|           |       class-templates.php
+|           |       
+|           +---public
+|           |   |   class-signup-form.php
+|           |   |   
+|           |   \---assets
+|           |           nlde-public.css
+|           |           nlde-public.js
+|           |           
+|           \---templates
+|               \---email
++---shield-forge-project
+|   |   README.md
+|   |   
+|   +---docs
+|   |       01-PROJECT-PLAN.md
+|   |       02-FIREWALL-TECHNICAL-GUIDE.md
+|   |       03-PROJECT-STATUS.md
+|   |       04-MONETIZATION-STRATEGY.md
+|   |       
+|   \---plugin
++---wp-license-platform
+|   |   README.md
+|   |   
+|   +---docs
+|   |       01-PROJECT-PLAN.md
+|   |       02-PAYPAL-INTEGRATION.md
+|   |       03-VAT-COMPLIANCE.md
+|   |       04-LICENSE-SYSTEM.md
+|   |       05-CUSTOMER-PORTAL-EMAIL.md
+|   |       06-API-REFERENCE.md
+|   |       07-MONETIZATION-STRATEGY.md
+|   |       08-LICENSEFORGE-CREATIVE-HANDOFF.md
+|   |       
+|   \---plugin
+|       |   wp-license-platform.zip
+|       |   
+|       \---wp-license-platform
+|           |   readme.txt
+|           |   uninstall.php
+|           |   wp-license-platform.php
+|           |   
+|           +---admin
+|           |   |   class-wplp-admin.php
+|           |   |   
+|           |   +---css
+|           |   |       admin.css
+|           |   |       
+|           |   +---js
+|           |   |       admin.js
+|           |   |       
+|           |   \---views
+|           |           dashboard.php
+|           |           licenses-list.php
+|           |           orders-list.php
+|           |           product-edit.php
+|           |           products-list.php
+|           |           settings-page.php
+|           |           upgrade-page.php
+|           |           
+|           +---assets
+|           |       ASSETS-GUIDE.md
+|           |       
+|           +---includes
+|           |       class-wplp-api.php
+|           |       class-wplp-checkout.php
+|           |       class-wplp-crypto.php
+|           |       class-wplp-customer.php
+|           |       class-wplp-db.php
+|           |       class-wplp-email.php
+|           |       class-wplp-invoice.php
+|           |       class-wplp-license.php
+|           |       class-wplp-order.php
+|           |       class-wplp-paypal.php
+|           |       class-wplp-plugin.php
+|           |       class-wplp-portal.php
+|           |       class-wplp-vat.php
+|           |       
+|           +---languages
+|           +---public
+|           |   +---css
+|           |   |       public.css
+|           |   |       
+|           |   +---js
+|           |   |       checkout.js
+|           |   |       
+|           |   \---views
+|           |           checkout.php
+|           |           portal-dashboard.php
+|           |           portal-downloads.php
+|           |           portal-invoices.php
+|           |           portal-licenses.php
+|           |           pricing-table.php
+|           |           thank-you.php
+|           |           
+|           \---templates
+|               +---emails
+|               |       license-expired.php
+|               |       purchase-confirmation.php
+|               |       refund-confirmation.php
+|               |       renewal-reminder.php
+|               |       
+|               \---invoices
+|                       invoice-template.php
+|                       
+\---wp-s3-backup-project
+    |   README.md
+    |   
+    +---docs
+    |   |   01-PROJECT-PLAN.md
+    |   |   02-S3-CLIENT-TECHNICAL-GUIDE.md
+    |   |   03-BACKUP-ENGINE-GUIDE.md
+    |   |   04-CREDENTIAL-SECURITY-GUIDE.md
+    |   |   05-TERRAFORM-GUIDE.md
+    |   |   06-WORDPRESS-ORG-SUBMISSION-GUIDE.md
+    |   |   07-RESTORE-GUIDE.md
+    |   |   08-MONETIZATION-STRATEGY.md
+    |   |   09-PAYMENT-PROCESSING-GUIDE.md
+    |   |   10-PRO-LICENSE-INTEGRATION.md
+    |   |   11-PRO-PLUGIN-HANDOFF.md
+    |   |   12-UI-UX-OVERHAUL-PLAN.md
+    |   |   13-PROJECT-STATUS.md
+    |   |   14-COMPETITIVE-RESEARCH-NAMING.md
+    |   |   15-COMMAND-ADDON-PLAN.md
+    |   |   16-COMMAND-ADDON-HANDOFF.md
+    |   |   17-CONTINUATION-HANDOFF.md
+    |   |   18-DEBUG-HELPER.md
+    |   |   19-MIGRATION-MODE-SPEC.md
+    |   |   20-BACKFORGE-CREATIVE-HANDOFF.md
+    |   |   
+    |   \---images
+    |           BackForgeLogo.png
+    |           BackForgeWP.png
+    |           ForgeBrand.png
+    |           LicenseForgeLogo.png
+    |           LicenseForgeWP.png
+    |           
+    +---plugin
+    |   |   wp-s3-backup-pro.zip
+    |   |   wp-s3-backup.zip
+    |   |   
+    |   +---wp-s3-backup
+    |   |   |   LICENSE
+    |   |   |   readme.txt
+    |   |   |   uninstall.php
+    |   |   |   wp-s3-backup.php
+    |   |   |   wps3b-debug.php
+    |   |   |   
+    |   |   +---admin
+    |   |   |   +---css
+    |   |   |   |       admin.css
+    |   |   |   |       
+    |   |   |   +---images
+    |   |   |   |       dashboard-banner.png
+    |   |   |   |       upgrade-banner.png
+    |   |   |   |       
+    |   |   |   +---js
+    |   |   |   |       admin.js
+    |   |   |   |       
+    |   |   |   \---views
+    |   |   |           backups-page.php
+    |   |   |           logs-page.php
+    |   |   |           settings-page.php
+    |   |   |           upgrade-page.php
+    |   |   |           
+    |   |   +---assets
+    |   |   |       ASSETS-GUIDE.md
+    |   |   |       
+    |   |   +---includes
+    |   |   |       class-wps3b-backup-engine.php
+    |   |   |       class-wps3b-backup-manager.php
+    |   |   |       class-wps3b-crypto.php
+    |   |   |       class-wps3b-logger.php
+    |   |   |       class-wps3b-plugin.php
+    |   |   |       class-wps3b-restore.php
+    |   |   |       class-wps3b-s3-client.php
+    |   |   |       class-wps3b-settings.php
+    |   |   |       
+    |   |   \---languages
+    |   \---wp-s3-backup-pro
+    |       |   wp-s3-backup-pro.php
+    |       |   
+    |       +---admin
+    |       |   +---css
+    |       |   |       pro-admin.css
+    |       |   |       
+    |       |   +---js
+    |       |   |       pro-admin.js
+    |       |   |       
+    |       |   \---views
+    |       |           license-page.php
+    |       |           storage-management.php
+    |       |           
+    |       +---includes
+    |       |       class-wps3b-pro-encryption.php
+    |       |       class-wps3b-pro-incremental.php
+    |       |       class-wps3b-pro-license.php
+    |       |       class-wps3b-pro-notifications.php
+    |       |       class-wps3b-pro-restore.php
+    |       |       class-wps3b-pro-schedule.php
+    |       |       class-wps3b-pro-storage.php
+    |       |       class-wps3b-pro.php
+    |       |       
+    |       \---languages
+    |               wp-s3-backup-pro.pot
+    |               
+    \---terraform
+        |   .terraform.lock.hcl
+        |   main.tf
+        |   outputs.tf
+        |   terraform.tfvars
+        |   variables.tf
+        |   
+        +---.terraform
+        |   |   terraform.tfstate
+        |   |   
+        |   \---providers
+        |       \---registry.terraform.io
+        |           \---hashicorp
+        |               \---aws
+        |                   \---5.100.0
+        |                       \---windows_amd64
+        |                               LICENSE.txt
+        |                               terraform-provider-aws_v5.100.0_x5.exe
+        |                               
+        \---bootstrap
+                .terraform.lock.hcl
+                main.tf
+                

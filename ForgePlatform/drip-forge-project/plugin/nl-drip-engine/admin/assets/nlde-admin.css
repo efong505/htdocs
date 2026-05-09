@@ -1,0 +1,114 @@
+.nlde-wrap { max-width: 1100px; }
+.nlde-wrap h1 { font-size: 24px; margin-bottom: 20px; }
+.nlde-stats { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+.nlde-stat-card {
+    background: #fff; border: 1px solid #ddd; border-radius: 8px;
+    padding: 20px 24px; flex: 1; min-width: 150px; text-align: center;
+}
+.nlde-stat-card .number { font-size: 32px; font-weight: 700; color: #0d7377; }
+.nlde-stat-card .label { font-size: 13px; color: #666; margin-top: 4px; }
+.nlde-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+.nlde-table th { background: #f8f8f8; padding: 12px 16px; text-align: left; font-size: 13px; color: #333; border-bottom: 1px solid #ddd; }
+.nlde-table td { padding: 12px 16px; border-bottom: 1px solid #eee; font-size: 14px; }
+.nlde-table tr:last-child td { border-bottom: none; }
+.nlde-table tr:hover td { background: #f9f9f9; }
+.nlde-badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 12px; font-weight: 600; text-transform: uppercase;
+}
+.nlde-badge.active { background: #d4edda; color: #155724; }
+.nlde-badge.draft { background: #fff3cd; color: #856404; }
+.nlde-badge.paused { background: #f8d7da; color: #721c24; }
+.nlde-badge.completed { background: #d1ecf1; color: #0c5460; }
+.nlde-badge.unsubscribed { background: #f8d7da; color: #721c24; }
+.nlde-badge.bounced { background: #e2e3e5; color: #383d41; }
+.nlde-badge.sent { background: #d1ecf1; color: #0c5460; }
+.nlde-badge.opened { background: #d4edda; color: #155724; }
+.nlde-badge.clicked { background: #cce5ff; color: #004085; }
+.nlde-badge.failed { background: #f8d7da; color: #721c24; }
+.nlde-form-group { margin-bottom: 16px; }
+.nlde-form-group label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 14px; }
+.nlde-form-group input[type="text"],
+.nlde-form-group input[type="email"],
+.nlde-form-group input[type="number"],
+.nlde-form-group input[type="password"],
+.nlde-form-group select,
+.nlde-form-group textarea {
+    width: 100%; max-width: 500px; padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;
+}
+.nlde-form-group textarea { min-height: 200px; font-family: monospace; }
+.nlde-btn {
+    display: inline-block; padding: 8px 20px; border-radius: 4px;
+    font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer; border: none;
+}
+.nlde-btn-primary { background: #0d7377; color: #fff; }
+.nlde-btn-primary:hover { background: #095456; color: #fff; }
+.nlde-btn-danger { background: #dc3545; color: #fff; }
+.nlde-btn-danger:hover { background: #c82333; color: #fff; }
+.nlde-btn-secondary { background: #6c757d; color: #fff; }
+.nlde-btn-secondary:hover { background: #5a6268; color: #fff; }
+.nlde-notice { padding: 12px 16px; border-radius: 4px; margin-bottom: 16px; }
+.nlde-notice.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+.nlde-card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+.nlde-card h2 { margin-top: 0; font-size: 18px; }
+.nlde-email-list { list-style: none; padding: 0; margin: 0; }
+.nlde-email-list li {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px; border: 1px solid #eee; border-radius: 6px; margin-bottom: 8px; background: #fff;
+}
+.nlde-email-list li .email-info { flex: 1; }
+.nlde-email-list li .email-info strong { font-size: 14px; }
+.nlde-email-list li .email-info .meta { font-size: 12px; color: #999; }
+.nlde-email-list li .email-actions { display: flex; gap: 8px; }
+.nlde-merge-tags { background: #f8f8f8; padding: 12px 16px; border-radius: 6px; margin-bottom: 16px; font-size: 13px; }
+.nlde-merge-tags code { background: #e9ecef; padding: 2px 6px; border-radius: 3px; }
+.nlde-pagination { margin-top: 16px; display: flex; gap: 8px; }
+.nlde-pagination a, .nlde-pagination span {
+    display: inline-block; padding: 6px 12px; border: 1px solid #ddd; border-radius: 4px; text-decoration: none; font-size: 13px;
+}
+.nlde-pagination span.current { background: #0d7377; color: #fff; border-color: #0d7377; }
+
+/* Template Grid */
+.nlde-template-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+.nlde-template-card {
+    background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px;
+    display: flex; flex-direction: column;
+}
+.nlde-template-card h3 { margin: 0 0 8px; font-size: 17px; }
+.nlde-template-card p { color: #666; font-size: 14px; margin: 0 0 12px; flex: 1; }
+.nlde-template-category {
+    display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px;
+    font-weight: 600; text-transform: uppercase; background: #e8f5f5; color: #0d7377; margin-bottom: 8px; align-self: flex-start;
+}
+.nlde-template-meta { display: flex; gap: 16px; font-size: 13px; color: #999; margin-bottom: 12px; }
+.nlde-template-timeline { border-left: 2px solid #0d7377; padding-left: 14px; margin-bottom: 4px; }
+.nlde-template-email { margin-bottom: 8px; font-size: 13px; }
+.nlde-template-day {
+    display: inline-block; background: #f0f0f0; padding: 1px 8px; border-radius: 3px;
+    font-size: 11px; font-weight: 600; color: #555; margin-right: 6px; min-width: 44px; text-align: center;
+}
+.nlde-template-subject { color: #333; }
+
+/* Inline Guide */
+.nlde-inline-guide { background: #f0fafa; border-color: #b2dfdb; }
+.nlde-inline-guide h2 { margin-top: 0; }
+
+/* Guide Page */
+.nlde-guide-toc ol { columns: 2; column-gap: 24px; }
+.nlde-guide-toc a { color: #0d7377; text-decoration: none; }
+.nlde-guide-toc a:hover { text-decoration: underline; }
+
+/* Hide Activity submenu from sidebar */
+#adminmenu a[href*="nlde-activity"] { display: none; }
+
+/* Print Styles */
+@media print {
+    #adminmenumain, #wpadminbar, #wpfooter, .nlde-btn, .nlde-dismiss-guide,
+    .nlde-guide-toc { display: none !important; }
+    .nlde-wrap { max-width: 100% !important; }
+    .nlde-card { break-inside: avoid; border: 1px solid #ccc !important; margin-bottom: 16px !important; }
+    .nlde-card h2 { font-size: 16px !important; }
+    .nlde-table { font-size: 12px !important; }
+    body { background: #fff !important; }
+    #wpcontent { margin-left: 0 !important; }
+}

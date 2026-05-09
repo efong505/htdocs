@@ -1,0 +1,42 @@
+/**
+ * WP S3 Backup Pro — Admin Styles
+ */
+
+/* Storage select + apply button */
+.wps3b-storage-select {
+	vertical-align: middle;
+	margin-right: 6px;
+}
+
+.wps3b-change-storage-btn {
+	vertical-align: middle;
+}
+
+.wps3b-storage-result {
+	margin-left: 8px;
+	font-size: 12px;
+	font-style: italic;
+}
+
+.wps3b-storage-result.success {
+	color: #00a32a;
+	font-style: normal;
+}
+
+.wps3b-storage-result.error {
+	color: #d63638;
+	font-style: normal;
+}
+
+/* Pro settings sections */
+.wps3b-wrap h3 {
+	margin-top: 24px;
+	padding-bottom: 6px;
+	border-bottom: 1px solid #e0e0e0;
+	font-size: 15px;
+}
+
+/* License status enhancements */
+.wps3b-wrap .wps3b-pro-hint {
+	margin-top: 20px;
+}
