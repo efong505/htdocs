@@ -3,16 +3,8 @@ Contributors:  waianaeboy702
 Donate link: https://www.paypal.com/biz/fund?id=87QSX24B66BHL
 Tags: Social Sharing, Shortcode, Icons, Social Icons, Eds Social Share
 Requires at least: 6.8
-<<<<<<< .mine
-Tested up to: 6.8
-Stable tag: 2.1
-||||||| .r3280170
-Tested up to: 6.8
-Stable tag: 2.0
-=======
 Tested up to: 6.9
-Stable tag: 3.0
->>>>>>> .r3514119
+Stable tag: 3.0.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -99,13 +91,6 @@ Image priority: Per-page image → Featured image → Default image from setting
 * Updated Twitter to X Icon
 * Upgraded Fontawesome version to  Font Awesome Free 6.7
 
-<<<<<<< .mine
-= 2.1 =
-* Security fix: Sanitized and escaped all shortcode attribute outputs to prevent Stored XSS (CVE-2026-2501)
-* Tested up to WordPress 6.8
-
-||||||| .r3280170
-=======
 = 2.1 =
 * Security fix: Sanitized and escaped all shortcode attribute outputs to prevent Stored XSS (CVE-2026-2501)
 * Applied esc_attr() to color and twitter shortcode attributes
@@ -129,7 +114,11 @@ Image priority: Per-page image → Featured image → Default image from setting
 * Updated: X (Twitter) branding and colors
 * Updated: Facebook brand color to current #1877F2
 
->>>>>>> .r3514119
+= 3.0.1 =
+* Fixed: Bundled correct Font Awesome 6.7.2 webfont files (was using SVG-only CSS which prevented icons from rendering)
+* Added: webfonts/ directory with woff2 and ttf font files
+* No longer requires CDN for icon rendering - fully self-contained
+
 == Frequently Asked Questions ==
 
 = How do I control the image shown when my page is shared? =
@@ -154,4 +143,7 @@ Security patch - fixes Stored XSS vulnerability in shortcode attributes. Update 
 
 = 3.0 =
 Major update — TikTok, Threads, WhatsApp, Reddit, Telegram, Truth Social. Open Graph share images. Custom profile URLs. Icon sizes.
+
+= 3.0.1 =
+Fixes icon rendering issue. Icons now display correctly without requiring an external CDN.
 

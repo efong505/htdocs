@@ -3,7 +3,7 @@
 Plugin Name:  Ed's Social Share
 Plugin URI:   https://nextlevelwebdevelopers.com
 Description:  The ultimate social share shortcode plugin. Add beautiful share buttons for Facebook, X, LinkedIn, TikTok, WhatsApp, Threads, and more anywhere on your WordPress site.
-Version:      3.0
+Version:      3.0.1
 Author:       waianaeboy702
 Author URI:   https://nextlevelwebdevelopers.com
 License:      GPL2
@@ -14,7 +14,7 @@ Domain Path:  /languages
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'ESS_VERSION', '3.0' );
+define( 'ESS_VERSION', '3.0.1' );
 define( 'ESS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ESS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
@@ -131,32 +131,10 @@ function ess_save_og_meta_box( $post_id ) {
 // Only load styles when shortcode is used
 add_action( 'wp_enqueue_scripts', 'ess_register_styles' );
 
-<<<<<<< .mine
 function ess_register_styles() {
     wp_register_style( 'eds-social-share-css', ESS_PLUGIN_URL . 'css/styles.css', array(), ESS_VERSION );
     wp_register_style( 'eds-social-share-fa', ESS_PLUGIN_URL . 'css/all.min.css', array(), '6.7.2' );
 }
-||||||| .r3280170
-// shortcode attributes
-$attr = shortcode_atts(
-      
-  array(
-      'color'   =>  '',
-	  'text'	=>	'Share Us',
-	  'twitter'	=>	'waianaeboy702',
-  ),
-  $attr,
-  'social_share'
-);
-// Header Text for share
-$content .= '<div style="text-align:center" class="wrapper">
-<h1 style="text-align:center; color:'. $attr['color'] .'; margin-bottom:1px;">'. $attr['text'] .'</h1>';
-=======
-function ess_register_styles() {
-    wp_register_style( 'eds-social-share-css', ESS_PLUGIN_URL . 'css/styles.css', array(), ESS_VERSION );
-    wp_register_style( 'eds-social-share-fa', ESS_PLUGIN_URL . 'css/all.min.css', array(), ESS_VERSION );
-}
->>>>>>> .r3514119
 
 function ess_enqueue_styles() {
     wp_enqueue_style( 'eds-social-share-css' );
