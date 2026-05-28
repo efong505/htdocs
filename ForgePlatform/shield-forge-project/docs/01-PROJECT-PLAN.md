@@ -21,7 +21,11 @@
 
 ## Overview
 
-ShieldForge is a self-hosted WordPress security plugin that protects sites from brute force attacks, malware, and common web vulnerabilities — without sending your data to a third-party cloud service.
+ShieldForge is the **Security Operations Layer** of the Forge ecosystem — a self-hosted WordPress security system that monitors, protects, and hardens the infrastructure everything else runs on.
+
+ShieldForge is not "a security plugin." It is the operational component that ensures business continuity by refining security pressure (attacks, probes, unauthorized access attempts) into structured detection, blocking, and response workflows — all running locally on the server with zero cloud dependency.
+
+**Operational Concern:** Protection. Monitoring. Hardening.
 
 **Brand:** ShieldForge (Forge Product Family)
 **Slug:** `shieldforge` (target), `sf-security` (working slug)
@@ -29,33 +33,74 @@ ShieldForge is a self-hosted WordPress security plugin that protects sites from 
 **Text Domain:** `sf-security`
 
 **Design Philosophy:**
+- Ownership-first — your security data stays on your server, under your control
 - Lightweight — no bloat, no upsell nags, no phoning home
 - Self-contained — no Composer, no external API dependencies for core features
 - WordPress-native — uses wp-cron, WP database, Settings API, standard hooks
 - Privacy-first — all scanning and blocking happens locally on the server
-- Forge UI — dark SaaS admin interface consistent with BackForge and DripForge
+- Purpose-built — solves the security operational concern completely, not partially
+- Forge UI — dark SaaS admin interface consistent with the Forge design system
 
 ---
 
 ## Forge Family Positioning
 
-| Product | Purpose | Status |
-|---------|---------|--------|
-| **BackForge** | WordPress backup to Amazon S3 | ✅ Complete |
-| **LicenseForge** | Self-hosted plugin licensing & sales | ✅ Complete |
-| **DripForge** | Self-hosted email drip sequences | ✅ Complete |
-| **ShieldForge** | Self-hosted WordPress security | 📋 Planning |
+Forge builds purposeful systems and infrastructure that help businesses and organizations refine operational pressure into structured workflows, resilient operations, and tools fit for the work.
 
-ShieldForge completes the "run your WordPress business without SaaS dependencies" story. A site owner using the full Forge stack has backups, licensing, email marketing, and security — all self-hosted, all under one design language.
+Each Forge product solves a specific operational concern completely:
+
+| Product | System Role | Operational Concern | Status |
+|---------|------------|--------------------|---------|
+| **BackForge** | Data Protection Layer | Business continuity, recovery, resilience | ✅ Complete |
+| **LicenseForge** | Commerce Infrastructure Layer | Revenue, fulfillment, customer management | ✅ Complete |
+| **DripForge** | Communication Automation Layer | Lead nurture, follow-up, conversion | ✅ Complete |
+| **ShieldForge** | Security Operations Layer | Protection, monitoring, hardening | ✅ Phase 1-3 Built |
+
+### The Operational Stack
+
+```
+┌─────────────────────────────────────────┐
+│  ShieldForge (Protection Layer)          │
+│  ┌───────────────────────────────────┐  │
+│  │  LicenseForge (Commerce Layer)    │  │
+│  │  ┌─────────────────────────────┐  │  │
+│  │  │  DripForge (Communication)  │  │  │
+│  │  │  ┌───────────────────────┐  │  │  │
+│  │  │  │  BackForge (Data)     │  │  │  │
+│  │  │  │  [Foundation]         │  │  │  │
+│  │  │  └───────────────────────┘  │  │  │
+│  │  └─────────────────────────────┘  │  │
+│  └───────────────────────────────────┘  │
+└─────────────────────────────────────────┘
+```
+
+ShieldForge wraps the entire stack — it protects the infrastructure that BackForge backs up, that LicenseForge sells through, and that DripForge communicates from. Without the security layer, the other systems are exposed.
+
+### Refinement Model Applied
+
+```
+Security Inputs → Filter → Workflow → Output → Feedback
+```
+
+| Stage | ShieldForge Implementation |
+|-------|---------------------------|
+| Inputs | Requests, login attempts, file changes, API calls |
+| Filter | WAF rules, rate limiter, IP blocklist, GeoIP |
+| Workflow | Block, lockout, quarantine, alert, log |
+| Output | Protected site, blocked threats, clean audit trail |
+| Feedback | Dashboard stats, activity log, scan reports |
 
 ---
 
 ## Target Users
 
-- WordPress site owners who want security without SaaS subscriptions
-- Developers managing multiple client sites who need a lightweight, consistent security layer
-- Privacy-conscious users who don't want security scan data sent to third-party servers
-- Users on shared hosting who can't configure server-level firewalls
+ShieldForge serves operators who refuse to outsource their security posture to a third-party cloud service:
+
+- **Small site owners** — need protection without complexity or $200/year SaaS subscriptions. The owner shouldn't have to become a security expert.
+- **Developers and freelancers** — managing multiple client sites, need a lightweight, consistent security layer that doesn't slow sites down or conflict with other plugins.
+- **Privacy-conscious operators** — don't want security scan data, file hashes, or traffic patterns sent to third-party servers. Security data stays on the server.
+- **Shared hosting users** — can't configure server-level firewalls, need application-level protection that works within WordPress.
+- **Forge ecosystem users** — running LicenseForge (commerce), DripForge (communication), or BackForge (data protection) and need the security layer to protect those systems.
 
 ---
 
