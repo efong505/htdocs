@@ -34,6 +34,9 @@ class WPS3B_Pro_License {
 	 */
 	public static function is_licensed() {
 		$data = get_transient( self::CACHE_KEY );
+		if ( ! $data ) {
+			$data = get_option( 'wps3b_pro_license_cache', null );
+		}
 		if ( $data && ! empty( $data['valid'] ) ) {
 			if ( isset( $data['expires'] ) && strtotime( $data['expires'] ) < time() ) {
 				return false;
@@ -52,13 +55,74 @@ class WPS3B_Pro_License {
 	 */
 	public static function get_tier() {
 		$data = get_transient( self::CACHE_KEY );
+		if ( ! $data ) {
+			$data = get_option( 'wps3b_pro_license_cache', null );
+		}
 		return $data && isset( $data['tier'] ) ? $data['tier'] : 'free';
 	}
 
 	/**
 	 * Validate license key against the API.
+	 * Uses direct DB lookup if License Platform is on the same site (avoids loopback).
 	 */
 	public static function validate( $key ) {
+		$body = self::validate_local( $key );
+
+		if ( $body === null ) {
+			$body = self::validate_remote( $key );
+		}
+
+		if ( $body && ! empty( $body['valid'] ) ) {
+			set_transient( self::CACHE_KEY, $body, self::CACHE_TTL );
+			update_option( 'wps3b_pro_license_cache', $body );
+			update_option( 'wps3b_pro_last_valid', time() );
+			return $body;
+		}
+
+		delete_transient( self::CACHE_KEY );
+		delete_option( 'wps3b_pro_license_cache' );
+		return false;
+	}
+
+	/**
+	 * Validate directly from database if License Platform is on this site.
+	 */
+	private static function validate_local( $key ) {
+		if ( ! class_exists( 'WPLP_License' ) ) {
+			return null;
+		}
+
+		global $wpdb;
+		$table = $wpdb->prefix . 'wplp_licenses';
+
+		if ( $wpdb->get_var( "SHOW TABLES LIKE '{$table}'" ) !== $table ) {
+			return null;
+		}
+
+		$license = $wpdb->get_row( $wpdb->prepare(
+			"SELECT * FROM {$table} WHERE license_key = %s LIMIT 1",
+			$key
+		) );
+
+		if ( ! $license || $license->status !== 'active' ) {
+			return array( 'valid' => false );
+		}
+
+		if ( ! empty( $license->expires_at ) && strtotime( $license->expires_at ) < time() ) {
+			return array( 'valid' => false );
+		}
+
+		return array(
+			'valid'   => true,
+			'tier'    => isset( $license->tier ) ? $license->tier : 'personal',
+			'expires' => isset( $license->expires_at ) ? $license->expires_at : '',
+		);
+	}
+
+	/**
+	 * Validate via remote HTTP API (fallback for external license servers).
+	 */
+	private static function validate_remote( $key ) {
 		$response = wp_remote_post( self::get_api_url() . 'validate', array(
 			'timeout' => 15,
 			'body'    => array(
@@ -73,15 +137,7 @@ class WPS3B_Pro_License {
 			return null;
 		}
 
-		$body = json_decode( wp_remote_retrieve_body( $response ), true );
-		if ( $body && ! empty( $body['valid'] ) ) {
-			set_transient( self::CACHE_KEY, $body, self::CACHE_TTL );
-			update_option( 'wps3b_pro_last_valid', time() );
-			return $body;
-		}
-
-		delete_transient( self::CACHE_KEY );
-		return false;
+		return json_decode( wp_remote_retrieve_body( $response ), true );
 	}
 
 	/**
@@ -153,6 +209,7 @@ class WPS3B_Pro_License {
 		delete_option( 'wps3b_pro_license_key' );
 		delete_transient( self::CACHE_KEY );
 		delete_option( 'wps3b_pro_last_valid' );
+		delete_option( 'wps3b_pro_license_cache' );
 		add_settings_error( 'wps3b_pro', 'deactivated', __( 'License deactivated.', 'wp-s3-backup-pro' ), 'success' );
 	}
 
@@ -172,6 +229,9 @@ class WPS3B_Pro_License {
 	 */
 	public static function get_status() {
 		$data = get_transient( self::CACHE_KEY );
+		if ( ! $data ) {
+			$data = get_option( 'wps3b_pro_license_cache', null );
+		}
 		if ( $data && ! empty( $data['valid'] ) ) {
 			return array(
 				'status'  => 'active',
