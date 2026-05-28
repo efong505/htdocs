@@ -21,9 +21,9 @@
 
 | Phase | Feature | Status |
 |-------|---------|--------|
-| 1 | Login Hardening & Brute Force Protection | ⬜ Not started |
-| 2 | IP Blocklist & Rate Limiting | ⬜ Not started |
-| 3 | Web Application Firewall (WAF) | ⬜ Not started |
+| 1 | Login Hardening & Brute Force Protection | ✅ Complete |
+| 2 | IP Blocklist & Rate Limiting | ✅ Complete |
+| 3 | Web Application Firewall (WAF) | ✅ Complete |
 | 4 | File Integrity Monitoring | ⬜ Not started |
 | 5 | Malware Scanner | ⬜ Not started |
 | 6 | Two-Factor Authentication (Pro) | ⬜ Not started |
@@ -45,15 +45,15 @@
 
 ## Remaining Before Phase 1 Build
 
-- [ ] Create plugin scaffold (entry point, activation, tables)
-- [ ] Set up admin menu with Forge dark UI
-- [ ] Create dashboard page skeleton
-- [ ] Create settings page skeleton
-- [ ] Implement login attempt tracking
-- [ ] Implement auto-lockout logic
-- [ ] Implement IP blocklist (manual)
-- [ ] Implement security event log
-- [ ] Build dashboard stats + recent events view
+- [x] Create plugin scaffold (entry point, activation, tables)
+- [x] Set up admin menu with Forge dark UI
+- [x] Create dashboard page skeleton
+- [x] Create settings page skeleton
+- [x] Implement login attempt tracking
+- [x] Implement auto-lockout logic
+- [x] Implement IP blocklist (manual)
+- [x] Implement security event log
+- [x] Build dashboard stats + recent events view
 - [ ] Test on PHP 7.4, 8.0, 8.1, 8.2, 8.3
 - [ ] Test on WordPress 6.0 through latest
 

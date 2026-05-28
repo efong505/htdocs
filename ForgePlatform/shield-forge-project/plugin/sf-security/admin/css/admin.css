@@ -1,0 +1,114 @@
+/* ShieldForge Admin — Forge Dark Theme */
+
+/* Header */
+.sfs-hero-banner { margin: -20px -20px 24px -20px; border-radius: 12px; overflow: hidden; }
+.sfs-hero-img { width: 100%; height: auto; display: block; max-height: 200px; object-fit: cover; }
+.sfs-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.sfs-logo { height: 36px; width: auto; }
+.sfs-version { font-size: 12px; color: #64748b; background: #1e293b; padding: 2px 8px; border-radius: 4px; }
+.sfs-header-subtitle { font-size: 18px; color: #94a3b8; font-weight: 500; }
+
+.sfs-wrap { max-width: 1200px; color: #e2e8f0; }
+.sfs-wrap h1 { font-size: 24px; margin-bottom: 20px; color: #f1f5f9; }
+.sfs-wrap h2 { color: #f1f5f9; margin-top: 0; font-size: 17px; }
+.sfs-wrap a { color: #E11D48; }
+
+/* Stats Grid */
+.sfs-stats { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+.sfs-stat-card {
+    background: #1e293b; border: 1px solid #334155; border-radius: 12px;
+    padding: 20px; flex: 1; min-width: 160px; text-align: center;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.sfs-stat-card:hover { border-color: #E11D48; box-shadow: 0 0 20px rgba(225,29,72,0.1); }
+.sfs-stat-icon { font-size: 24px; margin-bottom: 8px; }
+.sfs-stat-value { font-size: 28px; font-weight: 700; color: #E11D48; }
+.sfs-stat-label { font-size: 12px; color: #94a3b8; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Cards */
+.sfs-card {
+    background: #1e293b; border: 1px solid #334155; border-radius: 12px;
+    padding: 24px; margin-bottom: 20px;
+}
+
+/* Settings Grid */
+.sfs-settings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 20px; }
+
+/* Tables */
+.sfs-table { width: 100%; border-collapse: collapse; }
+.sfs-table th {
+    background: #0f172a; padding: 10px 14px; text-align: left;
+    font-size: 12px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid #334155;
+}
+.sfs-table td { padding: 10px 14px; border-bottom: 1px solid #1e293b; font-size: 13px; color: #cbd5e1; }
+.sfs-table tr:hover td { background: #0f172a; }
+.sfs-table code { background: #0f172a; padding: 2px 6px; border-radius: 3px; font-size: 12px; color: #e2e8f0; }
+
+/* Badges */
+.sfs-badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+}
+.sfs-badge-info { background: rgba(20,184,166,0.15); color: #14b8a6; }
+.sfs-badge-warning { background: rgba(245,158,11,0.15); color: #f59e0b; }
+.sfs-badge-critical { background: rgba(239,68,68,0.15); color: #ef4444; }
+
+/* Buttons */
+.sfs-btn {
+    display: inline-block; padding: 10px 20px; border-radius: 8px;
+    font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer;
+    border: none; transition: all 0.2s;
+}
+.sfs-btn-sm { padding: 5px 12px; font-size: 12px; border-radius: 6px; }
+.sfs-btn-primary { background: linear-gradient(135deg, #E11D48, #BE123C); color: #fff; }
+.sfs-btn-primary:hover { background: linear-gradient(135deg, #BE123C, #9F1239); color: #fff; box-shadow: 0 4px 12px rgba(225,29,72,0.3); }
+.sfs-btn-danger { background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; }
+.sfs-btn-danger:hover { background: linear-gradient(135deg, #dc2626, #b91c1c); color: #fff; }
+.sfs-btn-secondary { background: #334155; color: #e2e8f0; border: 1px solid #475569; }
+.sfs-btn-secondary:hover { background: #475569; color: #fff; }
+
+/* Forms */
+.sfs-form-group { margin-bottom: 16px; }
+.sfs-form-group label { display: block; font-weight: 500; margin-bottom: 6px; font-size: 14px; color: #e2e8f0; }
+.sfs-form-group input[type="text"],
+.sfs-form-group input[type="number"],
+.sfs-form-group input[type="email"],
+.sfs-form-group select {
+    background: #0f172a; border: 1px solid #334155; border-radius: 6px;
+    padding: 8px 12px; font-size: 14px; color: #e2e8f0; width: 100%; max-width: 300px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.sfs-form-group input:focus, .sfs-form-group select:focus {
+    border-color: #E11D48; outline: none; box-shadow: 0 0 0 3px rgba(225,29,72,0.15);
+}
+.sfs-form-group input[type="checkbox"] { margin-right: 8px; }
+.sfs-form-group .description { font-size: 12px; color: #64748b; margin-top: 4px; }
+
+/* Inline Form */
+.sfs-inline-form { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.sfs-inline-form input, .sfs-inline-form select {
+    background: #0f172a; border: 1px solid #334155; border-radius: 6px;
+    padding: 8px 12px; font-size: 14px; color: #e2e8f0;
+}
+
+/* Notices */
+.sfs-notice { padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; }
+.sfs-notice.success { background: rgba(34,197,94,0.1); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+
+/* Checklist */
+.sfs-checklist { list-style: none; padding: 0; margin: 0; }
+.sfs-checklist li { padding: 8px 0; font-size: 14px; border-bottom: 1px solid #334155; }
+.sfs-checklist li:last-child { border-bottom: none; }
+.sfs-check-pass { color: #22c55e; }
+.sfs-check-warn { color: #f59e0b; }
+.sfs-check-fail { color: #ef4444; }
+
+/* Override WP admin background for our pages */
+body.toplevel_page_sfs-dashboard #wpcontent,
+body.shieldforge_page_sfs-firewall #wpcontent,
+body.shieldforge_page_sfs-blocklist #wpcontent,
+body.shieldforge_page_sfs-log #wpcontent,
+body.shieldforge_page_sfs-settings #wpcontent {
+    background: #0f172a;
+}
