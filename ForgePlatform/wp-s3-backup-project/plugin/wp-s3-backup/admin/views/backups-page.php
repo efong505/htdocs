@@ -195,6 +195,12 @@ $class_labels = array(
 				<span class="dashicons dashicons-cloud-upload"></span>
 				<?php esc_html_e( 'Create Backup Now', 'wp-s3-backup' ); ?>
 			</button>
+			<div id="bf-bulk-actions" class="bf-bulk-actions" style="display:none;">
+				<span id="bf-selected-count" class="bf-bulk-count">0 selected</span>
+				<button type="button" id="bf-bulk-delete" class="bf-btn bf-btn--danger bf-btn--sm">
+					<span class="dashicons dashicons-trash"></span> <?php esc_html_e( 'Delete Selected', 'wp-s3-backup' ); ?>
+				</button>
+			</div>
 		</div>
 
 		<?php if ( $error ) : ?>
@@ -227,6 +233,14 @@ $class_labels = array(
 
 			<!-- Backup Cards -->
 			<div class="bf-backup-list">
+
+				<!-- Select All -->
+				<div class="bf-select-all-bar">
+					<label class="bf-check">
+						<input type="checkbox" id="bf-select-all">
+						<span><?php esc_html_e( 'Select All', 'wp-s3-backup' ); ?></span>
+					</label>
+				</div>
 
 				<!-- In-Progress Backup Card (hidden by default, shown by JS) -->
 				<div id="bf-backup-progress" class="bf-backup-card" style="display:none;border-color:var(--bf-teal);">
@@ -296,6 +310,9 @@ $class_labels = array(
 				<div class="bf-backup-card bf-fade-in">
 					<div class="bf-backup-card__header">
 						<span class="bf-backup-card__date">
+							<label class="bf-check bf-backup-check">
+								<input type="checkbox" class="bf-backup-select" value="<?php echo esc_attr( $backup['timestamp'] ); ?>">
+							</label>
 							<span class="dashicons dashicons-calendar-alt" style="color:var(--bf-teal);vertical-align:-3px;margin-right:4px;"></span>
 							<?php echo esc_html( $backup['date'] ); ?>
 						</span>

@@ -491,7 +491,7 @@
             }, function (res) {
                 if (res.success) {
                     $card.css({ opacity: 0, transform: 'translateX(20px)', transition: 'all 0.3s ease' });
-                    setTimeout(function () { $card.remove(); }, 300);
+                    setTimeout(function () { $card.remove(); updateBulkUI(); }, 300);
                 } else {
                     alert(res.data || 'Delete failed.');
                     $btn.prop('disabled', false).html('<span class="dashicons dashicons-trash"></span> Delete');
@@ -499,6 +499,63 @@
             }).fail(function () {
                 alert('Request failed.');
                 $btn.prop('disabled', false).html('<span class="dashicons dashicons-trash"></span> Delete');
+            });
+        });
+
+        // ─── Bulk Select & Delete ────────────────────
+
+        $('#bf-select-all').on('change', function () {
+            var checked = $(this).is(':checked');
+            $('.bf-backup-select').prop('checked', checked);
+            updateBulkUI();
+        });
+
+        $(document).on('change', '.bf-backup-select', function () {
+            var total = $('.bf-backup-select').length;
+            var selected = $('.bf-backup-select:checked').length;
+            $('#bf-select-all').prop('checked', selected === total);
+            updateBulkUI();
+        });
+
+        function updateBulkUI() {
+            var selected = $('.bf-backup-select:checked').length;
+            if (selected > 0) {
+                $('#bf-bulk-actions').show();
+                $('#bf-selected-count').text(selected + ' selected');
+            } else {
+                $('#bf-bulk-actions').hide();
+            }
+        }
+
+        $('#bf-bulk-delete').on('click', function () {
+            var timestamps = [];
+            $('.bf-backup-select:checked').each(function () {
+                timestamps.push($(this).val());
+            });
+
+            if (!timestamps.length) return;
+            if (!confirm('Delete ' + timestamps.length + ' backup(s)? This cannot be undone.')) return;
+
+            var $btn = $(this);
+            $btn.prop('disabled', true).text('Deleting...');
+            var completed = 0;
+            var total = timestamps.length;
+
+            timestamps.forEach(function (ts) {
+                $.post(wps3b_ajax.url, {
+                    action: 'wps3b_delete_backup',
+                    nonce: wps3b_ajax.backup_nonce,
+                    timestamp: ts
+                }, function (res) {
+                    completed++;
+                    if (res.success) {
+                        $('.bf-backup-select[value="' + ts + '"]').closest('.bf-backup-card')
+                            .css({ opacity: 0, transform: 'translateX(20px)', transition: 'all 0.3s ease' });
+                    }
+                    if (completed === total) {
+                        setTimeout(function () { location.reload(); }, 500);
+                    }
+                });
             });
         });
     });

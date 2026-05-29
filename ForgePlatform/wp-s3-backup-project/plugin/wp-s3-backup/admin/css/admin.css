@@ -896,3 +896,12 @@
 	.bf-backup-card__actions { flex-wrap: wrap; }
 	.bf-pricing-grid { flex-direction: column; align-items: center; }
 }
+
+/* Bulk Actions */
+.bf-bulk-actions { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+.bf-bulk-count { font-size: 13px; color: var(--bf-text-muted); }
+.bf-select-all-bar { padding: 8px 16px; border-bottom: 1px solid var(--bf-border); display: flex; align-items: center; }
+.bf-select-all-bar .bf-check { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--bf-text-muted); cursor: pointer; }
+.bf-backup-check { margin-right: 8px; }
+.bf-backup-check input[type="checkbox"],
+.bf-select-all-bar input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; accent-color: var(--bf-teal); }

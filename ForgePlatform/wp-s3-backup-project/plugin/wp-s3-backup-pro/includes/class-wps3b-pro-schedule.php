@@ -33,6 +33,16 @@ class WPS3B_Pro_Schedule {
 			'interval' => 14400,
 			'display'  => esc_html__( 'Every 4 Hours', 'wp-s3-backup-pro' ),
 		);
+
+		// Custom N-day interval
+		$custom_days = (int) get_option( 'wps3b_pro_custom_days', 0 );
+		if ( $custom_days > 0 ) {
+			$schedules['every_' . $custom_days . '_days'] = array(
+				'interval' => $custom_days * DAY_IN_SECONDS,
+				'display'  => sprintf( esc_html__( 'Every %d Days', 'wp-s3-backup-pro' ), $custom_days ),
+			);
+		}
+
 		return $schedules;
 	}
 
@@ -44,6 +54,13 @@ class WPS3B_Pro_Schedule {
 		$timestamp = wp_next_scheduled( $hook );
 		if ( $timestamp ) {
 			wp_unschedule_event( $timestamp, $hook );
+		}
+
+		// Handle custom N-day frequency
+		if ( preg_match( '/^custom_(\d+)$/', $frequency, $m ) ) {
+			$days = (int) $m[1];
+			update_option( 'wps3b_pro_custom_days', $days );
+			$frequency = 'every_' . $days . '_days';
 		}
 
 		// Calculate next run time based on time-of-day preference
