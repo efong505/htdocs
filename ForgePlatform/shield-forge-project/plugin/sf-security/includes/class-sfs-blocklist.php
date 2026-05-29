@@ -17,7 +17,6 @@ class SFS_Blocklist {
 
 		if (self::is_blocked($ip)) {
 			SFS_Logger::log('blocked_ip', 'critical', 'IP on blocklist');
-			http_response_code(403);
 			wp_die(
 				__('Access denied. Your IP has been blocked.', 'sf-security'),
 				__('Blocked', 'sf-security'),

@@ -38,7 +38,6 @@ class SFS_Firewall {
 						'uri'       => $uri,
 					]);
 
-					http_response_code(403);
 					wp_die(
 						__('This request has been blocked by the firewall.', 'sf-security'),
 						__('Blocked', 'sf-security'),

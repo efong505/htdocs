@@ -6,8 +6,12 @@
  * Version: 1.2.0
  * Author: Ekewaka
  * Author URI: https://ekewaka.com
- * License: GPL v2 or later
+ * License: GPL-2.0-or-later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: nl-drip-engine
+ * Domain Path: /languages
+ * Requires at least: 5.0
+ * Requires PHP: 7.4
  */
 
 if (!defined('ABSPATH')) exit;
@@ -49,121 +53,6 @@ class NL_Drip_Engine {
         NLDE_Admin_Menu::instance();
         NLDE_Signup_Form::instance();
         NLDE_Cron::instance();
-
-        // Plugin details modal & row meta
-        add_filter('plugins_api', [$this, 'plugin_info'], 20, 3);
-        add_filter('plugin_row_meta', [$this, 'plugin_row_meta'], 10, 2);
-
-        // Inject icon into plugin list
-        add_filter('site_transient_update_plugins', [$this, 'inject_plugin_icon']);
-        add_filter('transient_update_plugins', [$this, 'inject_plugin_icon']);
-
-        // Ensure Thickbox is loaded on plugins page
-        add_action('admin_enqueue_scripts', [$this, 'load_thickbox']);
-    }
-
-    public function load_thickbox($hook) {
-        if ($hook === 'plugins.php') {
-            add_thickbox();
-        }
-    }
-
-    public function inject_plugin_icon($transient) {
-        if (!is_object($transient)) return $transient;
-
-        $plugin_file = NLDE_PLUGIN_BASENAME;
-        $icon_url = NLDE_PLUGIN_URL . 'assets/icon-256x256.png';
-
-        // Add to no_update list so the icon shows even without an update available
-        if (!isset($transient->no_update[$plugin_file])) {
-            $transient->no_update[$plugin_file] = (object) [
-                'id'          => 'nl-drip-engine/nl-drip-engine.php',
-                'slug'        => 'nl-drip-engine',
-                'plugin'      => $plugin_file,
-                'new_version' => NLDE_VERSION,
-                'url'         => 'https://ekewaka.com/dripforge',
-                'package'     => '',
-                'icons'       => [
-                    '1x'      => $icon_url,
-                    '2x'      => $icon_url,
-                    'default' => $icon_url,
-                ],
-                'banners'     => [
-                    'low'     => NLDE_PLUGIN_URL . 'assets/banner-772x250.png',
-                    'high'    => NLDE_PLUGIN_URL . 'assets/banner-772x250.png',
-                ],
-            ];
-        }
-
-        return $transient;
-    }
-
-    /**
-     * Provide plugin info for the "View Details" modal
-     */
-    public function plugin_info($result, $action, $args) {
-        if ($action !== 'plugin_information' || !isset($args->slug) || $args->slug !== 'nl-drip-engine') {
-            return $result;
-        }
-
-        $info = new stdClass();
-        $info->name          = 'DripForge';
-        $info->slug          = 'nl-drip-engine';
-        $info->version       = NLDE_VERSION;
-        $info->author        = '<a href="https://ekewaka.com">Ekewaka</a>';
-        $info->author_profile = 'https://ekewaka.com';
-        $info->requires      = '5.0';
-        $info->tested        = '6.7';
-        $info->requires_php  = '7.4';
-        $info->version       = NLDE_VERSION;
-        $info->last_updated  = date('Y-m-d');
-        $info->homepage      = 'https://ekewaka.com/dripforge';
-
-        $info->sections = [
-            'description' => '<h3>Self-Hosted Email Drip Marketing for WordPress</h3>'
-                . '<p>DripForge lets you capture leads, build automated email sequences, and nurture subscribers — all from your WordPress dashboard with zero SaaS fees.</p>'
-                . '<h4>Features</h4>'
-                . '<ul>'
-                . '<li>Subscriber management with search, filter, and CSV export</li>'
-                . '<li>Drip sequence builder with timed email delivery</li>'
-                . '<li>Merge tags for personalized emails ({first_name}, {site_name}, etc.)</li>'
-                . '<li>SMTP integration (Amazon SES, SendGrid, Brevo, Gmail)</li>'
-                . '<li>Open and click tracking analytics</li>'
-                . '<li>Honeypot spam protection on signup forms</li>'
-                . '<li>CAN-SPAM compliant unsubscribe handling</li>'
-                . '<li>Shortcode-based signup forms for any page or post</li>'
-                . '</ul>',
-            'installation' => '<ol>'
-                . '<li>Upload the <code>nl-drip-engine</code> folder to <code>/wp-content/plugins/</code></li>'
-                . '<li>Activate the plugin in WP Admin → Plugins</li>'
-                . '<li>Go to DripForge → Settings to configure SMTP</li>'
-                . '<li>Create a sequence and add your emails</li>'
-                . '<li>Use <code>[nl_signup_form sequence="your-slug"]</code> on any page</li>'
-                . '</ol>',
-            'changelog' => '<h4>1.2.0</h4><ul><li>WYSIWYG editor for sequence emails</li><li>Send Test Email button in settings</li><li>Send Now button per sequence email</li><li>Manual send to individual subscribers</li><li>Debug Drip Queue tool</li><li>Fixed backslash escaping on email save</li><li>Fixed edit button loading in sequence editor</li></ul><h4>1.1.0</h4><ul><li>Rebranded to DripForge (Forge Product Family)</li><li>Updated author and plugin URI</li></ul><h4>1.0.0</h4><ul><li>Initial release</li></ul>',
-        ];
-
-        // Local banner and icon
-        $info->banners = [
-            'low'  => NLDE_PLUGIN_URL . 'assets/banner-772x250.png',
-            'high' => NLDE_PLUGIN_URL . 'assets/banner-772x250.png',
-        ];
-        $info->icons = [
-            '1x' => NLDE_PLUGIN_URL . 'assets/icon-256x256.png',
-            '2x' => NLDE_PLUGIN_URL . 'assets/icon-256x256.png',
-        ];
-
-        return $info;
-    }
-
-    /**
-     * Add "View Details" link to plugin row
-     */
-    public function plugin_row_meta($links, $file) {
-        if ($file === NLDE_PLUGIN_BASENAME) {
-            $links[] = '<a href="' . esc_url(admin_url('plugin-install.php?tab=plugin-information&plugin=nl-drip-engine&TB_iframe=true&width=600&height=550')) . '" class="thickbox open-plugin-details-modal">View details</a>';
-        }
-        return $links;
     }
 
     public function activate() {

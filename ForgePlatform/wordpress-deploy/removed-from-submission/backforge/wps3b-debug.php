@@ -2,6 +2,9 @@
 /**
  * BackForge Debug Helper — mu-plugin for troubleshooting.
  *
+ * REMOVED FROM SUBMISSION: Contains hardcoded emergency reset key.
+ * Keep this file for local development use only.
+ *
  * Features:
  * - Toggle WordPress WP_DEBUG on/off from admin UI
  * - View and clear BackForge restore/backup status
@@ -86,7 +89,6 @@ function wps3b_toggle_wp_debug( $enable ) {
 			$config
 		);
 	} elseif ( $enable ) {
-		// Add WP_DEBUG_LOG after WP_DEBUG if it doesn't exist
 		$config = preg_replace(
 			"/(define\s*\(\s*['\"]WP_DEBUG['\"]\s*,\s*true\s*\)\s*;)/",
 			"$1\ndefine( 'WP_DEBUG_LOG', true );",
@@ -102,7 +104,6 @@ function wps3b_toggle_wp_debug( $enable ) {
 			$config
 		);
 	} elseif ( $enable ) {
-		// Add WP_DEBUG_DISPLAY after WP_DEBUG_LOG
 		$config = preg_replace(
 			"/(define\s*\(\s*['\"]WP_DEBUG_LOG['\"]\s*,\s*true\s*\)\s*;)/",
 			"$1\ndefine( 'WP_DEBUG_DISPLAY', false );",

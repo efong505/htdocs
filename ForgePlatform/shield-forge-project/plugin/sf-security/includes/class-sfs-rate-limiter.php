@@ -18,7 +18,6 @@ class SFS_Rate_Limiter {
 		$limit = self::get_limit_for_request();
 		if (!self::is_within_limit($ip, $limit)) {
 			SFS_Logger::log('rate_limited', 'warning', ['limit' => $limit, 'uri' => $_SERVER['REQUEST_URI'] ?? '']);
-			http_response_code(429);
 			wp_die(
 				__('Too many requests. Please slow down.', 'sf-security'),
 				__('Rate Limited', 'sf-security'),

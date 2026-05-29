@@ -5,7 +5,7 @@ Tags: email marketing, drip campaign, email automation, lead generation, newslet
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.1.1
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,6 +76,12 @@ Yes. Create as many sequences as you need, each with their own emails and timing
 4. Frontend signup form
 
 == Changelog ==
+
+= 1.2.0 =
+* Added sequence templates page with 6 pre-built blueprints
+* Added full documentation/guide page
+* Added inline guide cards for new users
+* Added empty state CTA on sequences page
 
 = 1.1.0 =
 * Rebranded to DripForge (Forge Product Family)

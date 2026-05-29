@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ShieldForge
  * Plugin URI:  https://ekewaka.com/shieldforge
- * Description: Self-hosted WordPress security with firewall, brute force protection, country blocking, and file integrity monitoring — zero cloud dependency.
+ * Description: Self-hosted WordPress security with login hardening, brute force protection, IP blocklist, rate limiting, and web application firewall — zero cloud dependency.
  * Version:     1.0.0
  * Author:      Ekewaka
  * Author URI:  https://ekewaka.com

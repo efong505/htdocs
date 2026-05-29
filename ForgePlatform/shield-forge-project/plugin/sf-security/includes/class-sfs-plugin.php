@@ -27,7 +27,7 @@ class SFS_Plugin {
 		add_menu_page(
 			'ShieldForge', 'ShieldForge', 'manage_options',
 			'sfs-dashboard', [SFS_Settings::class, 'page_dashboard'],
-			'dashicons-shield', 3
+			'dashicons-shield', 80
 		);
 		add_submenu_page('sfs-dashboard', 'Dashboard', 'Dashboard', 'manage_options', 'sfs-dashboard', [SFS_Settings::class, 'page_dashboard']);
 		add_submenu_page('sfs-dashboard', 'Firewall', 'Firewall', 'manage_options', 'sfs-firewall', [SFS_Settings::class, 'page_firewall']);

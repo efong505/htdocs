@@ -51,7 +51,7 @@ class NLDE_Cron {
             }
         }
 
-        if ($sent_count > 0) {
+        if ($sent_count > 0 && defined('WP_DEBUG') && WP_DEBUG) {
             error_log("DripForge: Sent {$sent_count} emails.");
         }
     }
