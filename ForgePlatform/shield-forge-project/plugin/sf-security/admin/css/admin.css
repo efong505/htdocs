@@ -2,7 +2,7 @@
 
 /* Header */
 .sfs-hero-banner { margin: -20px -20px 24px -20px; border-radius: 12px; overflow: hidden; }
-.sfs-hero-img { width: 100%; height: auto; display: block; max-height: 200px; object-fit: cover; }
+.sfs-hero-img { width: 100%; height: auto; display: block; object-fit: contain; }
 .sfs-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
 .sfs-logo { height: 36px; width: auto; }
 .sfs-version { font-size: 12px; color: #64748b; background: #1e293b; padding: 2px 8px; border-radius: 4px; }
@@ -112,3 +112,31 @@ body.shieldforge_page_sfs-log #wpcontent,
 body.shieldforge_page_sfs-settings #wpcontent {
     background: #0f172a;
 }
+
+/* Toggle Switch */
+.sfs-toggle { position: relative; display: inline-block; width: 40px; height: 22px; }
+.sfs-toggle input { opacity: 0; width: 0; height: 0; }
+.sfs-toggle-slider {
+    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+    background: #334155; border-radius: 22px; transition: 0.2s;
+}
+.sfs-toggle-slider:before {
+    position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px;
+    background: #94a3b8; border-radius: 50%; transition: 0.2s;
+}
+.sfs-toggle input:checked + .sfs-toggle-slider { background: #E11D48; }
+.sfs-toggle input:checked + .sfs-toggle-slider:before { transform: translateX(18px); background: #fff; }
+
+/* Config Bar */
+.sfs-config-bar { padding: 16px 20px; }
+.sfs-config-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.sfs-config-left, .sfs-config-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.sfs-select {
+    background: #0f172a; border: 1px solid #334155; border-radius: 6px;
+    padding: 6px 10px; font-size: 13px; color: #e2e8f0; max-width: 360px;
+}
+.sfs-input-sm {
+    background: #0f172a; border: 1px solid #334155; border-radius: 6px;
+    padding: 6px 10px; font-size: 13px; color: #e2e8f0; width: 160px;
+}
+.sfs-select:focus, .sfs-input-sm:focus { border-color: #E11D48; outline: none; }
