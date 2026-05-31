@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: WP S3 Backup
- * Plugin URI:  https://ekewaka.com/backforge
+ * Plugin URI:  https://github.com/ekewaka/wp-s3-backup
  * Description: Automatically back up your WordPress database and files to Amazon S3. No AWS SDK required — uses direct S3 REST API with Signature V4 authentication.
  * Version:     1.0.0
- * Author:      Ekewaka
+ * Author:      Edward Fong
  * Author URI:  https://ekewaka.com
  * License:     GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html

@@ -275,7 +275,7 @@ class WPS3B_Plugin {
 			'wps3b_settings',
 			array( 'WPS3B_Settings', 'render_settings_page' ),
 			'dashicons-cloud-upload',
-			81
+			3
 		);
 
 		add_submenu_page(
